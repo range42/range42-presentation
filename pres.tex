@@ -1,0 +1,320 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+% Define NC3 colors
+\definecolor{nc3red}{RGB}{226,35,26}
+\definecolor{nc3blue}{RGB}{0,174,239}
+\definecolor{nc3lightblue}{RGB}{173,216,230}
+\definecolor{nc3darkblue}{RGB}{28,69,135}
+\definecolor{nc3gray}{RGB}{108,117,125}
+
+% Custom theme
+\usetheme{default}
+\usecolortheme{default}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Custom title page
+\defbeamertemplate*{title page}{nc3}
+{
+  \begin{tikzpicture}[remember picture,overlay]
+    % Background geometric shapes
+    \fill[black] (current page.south west) -- ++(0,8cm) -- ++(16cm,-8cm) -- cycle;
+    \fill[lightgray!30] (current page.north east) -- ++(-8cm,0) -- ++(8cm,-8cm) -- cycle;
+    
+    % Page number and date in top corners
+    \node[anchor=north west] at (current page.north west) {\color{black}\footnotesize 1 \quad 29-Aug-25};
+    
+    % Logo and text
+    \node[anchor=north west] at ([xshift=1cm,yshift=-1.5cm]current page.north west) {
+      \begin{minipage}{6cm}
+        % NC3 Logo representation (simplified)
+        \begin{tikzpicture}
+          \draw[nc3red, very thick, rounded corners=0.3cm] (0,0) circle (0.8cm);
+          \draw[nc3blue, very thick, rounded corners=0.3cm] (0.3,0) circle (0.6cm);
+          \node[nc3blue, font=\huge\bfseries] at (0.15,0) {C3};
+        \end{tikzpicture}
+        
+        \vspace{0.5cm}
+        
+        {\Large\bfseries nc3.lu}
+        
+        \vspace{0.3cm}
+        
+        {\normalsize National Cybersecurity\\
+        Competence Center\\
+        \textbf{LUXEMBOURG}}
+      \end{minipage}
+    };
+    
+    % Bottom right page info
+    \node[anchor=south east] at ([xshift=-0.5cm,yshift=0.5cm]current page.south east) {
+      \color{white}\footnotesize 29-Aug-25
+    };
+  \end{tikzpicture}
+}
+
+% Custom slide template
+\defbeamertemplate*{frametitle}{nc3}
+{
+  \begin{tikzpicture}[remember picture,overlay]
+    % Page number and date in top corners
+    \node[anchor=north west] at (current page.north west) {\color{black}\footnotesize \insertframenumber \quad 29-Aug-25};
+    
+    % Logo in bottom right
+    \node[anchor=south east] at ([xshift=-0.5cm,yshift=0.5cm]current page.south east) {
+      \begin{minipage}{3cm}
+        \raggedleft
+        \begin{tikzpicture}[scale=0.3]
+          \draw[nc3red, very thick, rounded corners=0.1cm] (0,0) circle (0.8cm);
+          \draw[nc3blue, very thick, rounded corners=0.1cm] (0.3,0) circle (0.6cm);
+        \end{tikzpicture}
+        
+        {\small\bfseries nc3.lu}
+        
+        {\tiny National Cybersecurity\\
+        Competence Center\\
+        \textbf{LUXEMBOURG}}
+      \end{minipage}
+    };
+  \end{tikzpicture}
+  
+  \vspace{1cm}
+  \insertframetitle
+  \vspace{0.5cm}
+}
+
+% Custom background for different slide types
+\defbeamertemplate*{background}{nc3}
+{
+  \begin{tikzpicture}[remember picture,overlay]
+    \ifnum\thepage=2
+      % About Us slide background
+      \fill[nc3darkblue] (current page.south west) rectangle ([xshift=8cm]current page.north west);
+      \fill[nc3lightblue] ([xshift=8cm]current page.south west) rectangle (current page.north east);
+      
+      % Blue accent bar
+      \fill[nc3blue] ([yshift=3cm]current page.south east) rectangle ([xshift=-0.5cm,yshift=1cm]current page.south east);
+    \fi
+    
+    \ifnum\thepage>2
+      \ifnum\thepage<6
+        % Slides 3-5 background
+        \fill[nc3lightblue] ([yshift=2cm]current page.south west) rectangle (current page.north east);
+        \fill[nc3blue] (current page.south west) rectangle ([yshift=1cm]current page.north west);
+        \fill[nc3blue] ([yshift=3cm]current page.south east) rectangle ([xshift=-0.5cm,yshift=1cm]current page.south east);
+      \fi
+    \fi
+    
+    \ifnum\thepage=6
+      % Contact slide background
+      \fill[nc3lightblue] (current page.south west) rectangle ([yshift=5cm]current page.north east);
+    \fi
+  \end{tikzpicture}
+}
+
+\begin{document}
+
+% Title slide
+\begin{frame}[plain]
+\usebeamertemplate{title page}
+\end{frame}
+
+% About Us slide
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+  % Page number and date
+  \node[anchor=north west] at (current page.north west) {\color{black}\footnotesize 2 \quad 29-Aug-25};
+  
+  % Left side content (white icons and text on dark blue)
+  \node[anchor=north west, text=white] at ([xshift=1cm,yshift=-2cm]current page.north west) {
+    \begin{minipage}{6cm}
+      % Competence building
+      \begin{tikzpicture}
+        \draw[white, thick] (0,0) rectangle (0.8,0.6);
+        \draw[white, thick] (0.1,0.1) -- (0.7,0.1);
+        \draw[white, thick] (0.1,0.3) -- (0.5,0.3);
+      \end{tikzpicture}
+      \hspace{0.5cm} {\large Competence building}
+      
+      \vspace{1cm}
+      
+      % Capacity building
+      \begin{tikzpicture}
+        \foreach \i in {0,1,2} {
+          \draw[white, thick] (\i*0.3,0) circle (0.1);
+          \draw[white, thick] (\i*0.3,-0.3) circle (0.1);
+        }
+      \end{tikzpicture}
+      \hspace{0.5cm} {\large Capacity building}
+      
+      \vspace{1cm}
+      
+      % Research, data & innovation
+      \begin{tikzpicture}
+        \draw[white, thick] (0,0) circle (0.3);
+        \draw[white, thick] (0,-0.5) -- (0,-0.8);
+        \draw[white, thick] (-0.2,-0.8) -- (0.2,-0.8);
+      \end{tikzpicture}
+      \hspace{0.5cm} {\large Research, data \& innovation}
+      
+      \vspace{1cm}
+      
+      % Ecosystem & industrialization
+      \begin{tikzpicture}
+        \draw[white, thick] (0,0) -- (0.6,0.4);
+        \draw[white, thick] (0,0) -- (0.6,-0.4);
+        \draw[white, thick] (0.6,0.4) -- (0.6,-0.4);
+      \end{tikzpicture}
+      \hspace{0.5cm} {\large Ecosystem \& industrialization}
+      
+      \vspace{1cm}
+      
+      % NCC coordination
+      \begin{tikzpicture}
+        \draw[white, thick] (0,0) circle (0.3);
+        \foreach \i in {0,60,120,180,240,300} {
+          \draw[white, thick] (0,0) -- (\i:0.5);
+          \draw[white, thick] (\i:0.5) circle (0.05);
+        }
+      \end{tikzpicture}
+      \hspace{0.5cm} {\large NCC coordination}
+    \end{minipage}
+  };
+  
+  % Right side content
+  \node[anchor=north east] at ([xshift=-2cm,yshift=-2cm]current page.north east) {
+    \begin{minipage}{7cm}
+      {\Huge\bfseries ABOUT US}
+      
+      \vspace{1cm}
+      
+      \begin{tikzpicture}
+        \fill[nc3blue] (0,0) rectangle (1,0.3);
+      \end{tikzpicture}
+      
+      \vspace{0.5cm}
+      
+      {\large The NC3 mission is to support the Luxembourg ecosystem in building cybersecurity competence and capacity, in a way that contributes to develop the cybersecurity industrial base, and strengthens the strategic autonomy of the European Union.}
+    \end{minipage}
+  };
+  
+  % Logo in bottom right
+  \node[anchor=south east] at ([xshift=-0.5cm,yshift=0.5cm]current page.south east) {
+    \begin{minipage}{3cm}
+      \raggedleft
+      \begin{tikzpicture}[scale=0.3]
+        \draw[nc3red, very thick, rounded corners=0.1cm] (0,0) circle (0.8cm);
+        \draw[nc3blue, very thick, rounded corners=0.1cm] (0.3,0) circle (0.6cm);
+      \end{tikzpicture}
+      
+      {\small\bfseries nc3.lu}
+      
+      {\tiny National Cybersecurity\\
+      Competence Center\\
+      \textbf{LUXEMBOURG}}
+    \end{minipage}
+  };
+\end{tikzpicture}
+\end{frame}
+
+% Blank slides 3-5
+\foreach \i in {3,4,5} {
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+      % Page number and date
+      \node[anchor=north west] at (current page.north west) {\color{black}\footnotesize \i \quad 29-Aug-25};
+      
+      % Logo in bottom right
+      \node[anchor=south east] at ([xshift=-0.5cm,yshift=0.5cm]current page.south east) {
+        \begin{minipage}{3cm}
+          \raggedleft
+          \begin{tikzpicture}[scale=0.3]
+            \draw[nc3red, very thick, rounded corners=0.1cm] (0,0) circle (0.8cm);
+            \draw[nc3blue, very thick, rounded corners=0.1cm] (0.3,0) circle (0.6cm);
+          \end{tikzpicture}
+          
+          {\small\bfseries nc3.lu}
+          
+          {\tiny National Cybersecurity\\
+          Competence Center\\
+          \textbf{LUXEMBOURG}}
+        \end{minipage}
+      };
+    \end{tikzpicture}
+  \end{frame}
+}
+
+% Contact slide
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+  % Contact info in header
+  \node[anchor=north west] at ([yshift=-0.5cm]current page.north west) {
+    \color{black}\footnotesize +352 274 00 98 667\\
+    info@nc3.lu
+  };
+  
+  % Main logo centered
+  \node at (current page.center) {
+    \begin{minipage}{8cm}
+      \centering
+      \begin{tikzpicture}[scale=1.5]
+        \draw[nc3red, very thick, rounded corners=0.3cm] (0,0) circle (1.2cm);
+        \draw[nc3blue, very thick, rounded corners=0.3cm] (0.4,0) circle (0.9cm);
+      \end{tikzpicture}
+      
+      \vspace{0.5cm}
+      
+      {\Huge\bfseries nc3.lu}
+      
+      \vspace{0.3cm}
+      
+      {\Large National Cybersecurity\\
+      Competence Center\\
+      \textbf{LUXEMBOURG}}
+    \end{minipage}
+  };
+  
+  % Contact details at bottom
+  \node at ([yshift=2cm]current page.center) {
+    \begin{minipage}{8cm}
+      \centering
+      
+      % Location icon
+      \begin{tikzpicture}
+        \fill[black] (0,0) circle (0.3);
+        \draw[white, thick] (0,0.1) -- (0,-0.1);
+        \draw[white, thick] (-0.1,0) -- (0.1,0);
+      \end{tikzpicture}
+      
+      \vspace{0.8cm}
+      
+      % Phone icon and number
+      \begin{tikzpicture}
+        \fill[black] (0,0) circle (0.3);
+        \draw[white, thick, rounded corners=0.1] (-0.1,-0.1) -- (0.1,0.1);
+      \end{tikzpicture}
+      \hspace{1cm} {\LARGE\bfseries +352 274 00 98 667}
+      
+      \vspace{0.8cm}
+      
+      % Email icon and address
+      \begin{tikzpicture}
+        \fill[black] (0,0) circle (0.3);
+        \draw[white, thick] (-0.2,0) rectangle (0.2,0.15);
+        \draw[white, thick] (-0.2,0.15) -- (0,0.05) -- (0.2,0.15);
+      \end{tikzpicture}
+      \hspace{1cm} {\LARGE\bfseries info@nc3.lu}
+      
+    \end{minipage}
+  };
+\end{tikzpicture}
+\end{frame}
+
+\end{document}
