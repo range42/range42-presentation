@@ -1,0 +1,267 @@
+% !TEX TS-program = xelatex
+\documentclass[aspectratio=169]{beamer}
+
+% --- THEME & LAYOUT ---
+\usetheme[numbering=fraction,progressbar=head]{metropolis} % modern, minimal  [oai_citation:5‡tug.org](https://tug.org/docs/latex/beamertheme-metropolis/metropolistheme.pdf?utm_source=chatgpt.com)
+\setbeamersize{text margin left=8mm,text margin right=8mm}
+
+% --- FONTS (XeLaTeX) ---
+\usepackage{fontspec}
+\setsansfont[
+  Ligatures=TeX, Scale=1.02,
+  BoldFont = {IBM Plex Sans Bold},
+  ItalicFont = {IBM Plex Sans Italic}
+]{IBM Plex Sans} % CTAN 'plex' package  [oai_citation:6‡CTAN](https://ctan.org/tex-archive/fonts/plex?utm_source=chatgpt.com)
+\setmonofont{IBM Plex Mono}
+
+% --- ICONS ---
+\usepackage{fontawesome5} % Font Awesome 5 icons  [oai_citation:7‡CTAN](https://ctan.org/pkg/fontawesome5?utm_source=chatgpt.com)
+
+% --- COLORS (cyber palette) ---
+\definecolor{cyber-bg}{HTML}{0B0F14}   % charcoal
+\definecolor{cyber-ink}{HTML}{E6EEF5}  % offwhite
+\definecolor{cyber-accent}{HTML}{217EAA}% blue accent (trust)  [oai_citation:8‡Color Hex](https://www.color-hex.com/color-palette/113704?utm_source=chatgpt.com)
+\definecolor{cyber-mid}{HTML}{7D9CB7}  % secondary
+\definecolor{cyber-soft}{HTML}{8CA4AC} % tertiary
+\setbeamercolor{normal text}{fg=cyber-ink,bg=cyber-bg}
+\setbeamercolor{frametitle}{fg=cyber-ink,bg=cyber-bg}
+\setbeamercolor{progress bar}{fg=cyber-accent,bg=cyber-soft}
+\setbeamercolor{alerted text}{fg=cyber-accent}
+
+% --- LINKS ---
+\hypersetup{colorlinks=true, linkcolor=cyber-accent, urlcolor=cyber-accent}
+
+% --- CODE / BOXES ---
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color{black!5},
+  frame=single, rulecolor=\color{cyber-soft},
+  keywordstyle=\color{cyber-accent}\bfseries,
+  commentstyle=\color{cyber-soft},
+  showstringspaces=false
+}
+\usepackage[most]{tcolorbox}
+\tcbset{colback=black!5!cyber-bg, colframe=cyber-soft, coltext=cyber-ink, boxsep=1mm, left=2mm, right=2mm}
+
+% --- SPEAKER NOTES ---
+\usepackage{pgfpages}
+% Toggle one of the following as needed during rehearsal/presenting:
+% \setbeameroption{hide notes}         % Slides only
+% \setbeameroption{show notes}         % Notes on second screen (presenter)
+% \setbeameroption{show only notes}    % Notes only
+% See references for Beamer notes usage.  [oai_citation:9‡TeX - LaTeX Stack Exchange](https://tex.stackexchange.com/questions/483764/add-notes-to-latex-beamer-and-view-them?utm_source=chatgpt.com)
+
+% --- TITLE INFO ---
+%\title{\faShieldAlt\; Range42 — Semi-Technical Overview}
+\title{\faIcon{shield-alt}\; Range42 — Semi-Technical Overview}
+\subtitle{Modular Cyber Range Platform for Real-World Readiness}
+\author{NC3 / Range42 Team}
+\date{\today}
+\institute{\faServer\; Proxmox \quad \faCogs\; Ansible \quad \faProjectDiagram\; Orchestration \quad \faBinoculars\; Telemetry}
+
+\begin{document}
+
+% --- TITLE ---
+\begin{frame}
+  \titlepage
+  \note[item]{Goal: 20-minute semi-technical tour of Range42’s building blocks and roadmap.}
+  \note[item]{Audience: technical staff who aren’t deep specialists.}
+\end{frame}
+
+% --- AGENDA ---
+\begin{frame}{Agenda}
+  \begin{enumerate}
+    \item What Range42 is \& why it matters
+    \item Architecture at a glance
+    \item Repositories by function (highlights)
+    \item Risks, governance, and quality gates
+    \item 90-day roadmap \& demo plan
+  \end{enumerate}
+  \note[item]{Keep flow brisk; ~2–3 min per major section.}
+\end{frame}
+
+% --- WHAT IS RANGE42 ---
+\begin{frame}{What is Range42?}
+  \begin{itemize}
+    \item \textbf{Modular cyber range platform} for offensive, defensive, and hybrid training.
+    \item \textbf{Reproducible IaC}: build, deploy, document labs via Proxmox, Ansible, Docker.
+    \item \textbf{Private APIs} for orchestration \& telemetry; developer toolkits for pipelines.
+  \end{itemize}
+  \begin{tcolorbox}
+    \faInfoCircle\; Built to simulate \emph{real-world incidents} safely, with isolation, snapshots, and telemetry.
+  \end{tcolorbox}
+  \note[item]{Anchor on “safe realism”: isolation, resets, data trails.}
+\end{frame}
+
+% --- ARCH OVERVIEW ---
+\begin{frame}{Architecture at a Glance}
+  \begin{itemize}
+    \item \textbf{Hypervisor layer}: Proxmox VMs/LXCs; snapshots; network segments.
+    \item \textbf{Automation layer}: Ansible roles orchestrate lifecycle, network, firewall, images.
+    \item \textbf{Control plane}: Backend API (routes for VM/Net/Runner); Kong gateway.
+    \item \textbf{UX}: Deployer UI (visual design), EMP mockup (exercise mgmt), trainee access.
+    \item \textbf{Observability}: Wazuh for logs/alerts; structured telemetry.
+  \end{itemize}
+  \note[item]{Emphasize modularity: builder/deployer/runner + gateway.}
+\end{frame}
+
+% === REPOSITORY HIGHLIGHTS (use your JSON) ===
+
+\section{Automation}
+
+\begin{frame}{range42-ansible\_roles-private-devkit \; \faTerminal}
+  \textbf{Status:} Active \hfill \textbf{Lang:} Shell\\[2mm]
+  \textbf{Purpose:} Helper scripts for Proxmox/Ansible ops (VM/LXC, firewall, snapshots, storage).\\[2mm]
+  \textbf{Highlights}
+  \begin{itemize}
+    \item DevKit scripts standardize Proxmox ops \& JSON/text transformations.
+    \item \alert{Zero Bandit findings}; add CI and security baseline.
+    \item Prioritize documentation and license finalization.
+  \end{itemize}
+  \note[item]{Mature and actively used to drive orchestration; governance \& CI next. Tighten contributor UX (docs, editorconfig, SECURITY).}
+\end{frame}
+
+\begin{frame}{range42-ansible\_roles-proxmox\_controller \; \faCogs}
+  \textbf{Status:} Active \hfill \textbf{Lang:} Ansible/YAML\\[2mm]
+  \textbf{Purpose:} Manage VM/LXC lifecycle, networking, storage, firewall, snapshots, templates, ISOs.\\[2mm]
+  \textbf{Next Steps}
+  \begin{itemize}
+    \item Add CI with \texttt{ansible-lint} and idempotence tests.
+    \item Document variables and example playbooks.
+  \end{itemize}
+  \note[item]{Breadth is strong; reliability needs CI and smoke tests. Improve onboarding with examples and var docs.}
+\end{frame}
+
+\section{Control Plane}
+
+\begin{frame}{range42-backend-api \; \faProjectDiagram}
+  \textbf{Status:} Active \hfill \textbf{Lang:} Python/Shell/YAML\\[2mm]
+  \textbf{Purpose:} Routes for Proxmox control, runner bundles, admin/debug; schemas \& curl helpers.\\[2mm]
+  \textbf{Security/Quality}
+  \begin{itemize}
+    \item Scans clean (\texttt{bandit}, \texttt{pip-audit}/safety).
+    \item \alert{Add CI and unit tests}; finalize license; add \texttt{SECURITY} policy.
+  \end{itemize}
+  \note[item]{Good structure; production hardening: CI, tests, dependency pinning, runtime config validation.}
+\end{frame}
+
+\begin{frame}{range42-api-definitions \; \faSitemap}
+  \textbf{Status:} Stale \hfill \textbf{Lang:} —\\[2mm]
+  \textbf{Purpose:} Placeholder for API definitions/schemas.\\[2mm]
+  \textbf{Decision Point}
+  \begin{itemize}
+    \item Repo is empty: \textbf{archive or seed OpenAPI specs}.
+    \item If kept: minimal README \& roadmap.
+  \end{itemize}
+  \note[item]{Reduce noise or make it the single source of API truth.}
+\end{frame}
+
+\section{UX Layers}
+
+\begin{frame}{range42-deployer-ui \; \faDrawPolygon}
+  \textbf{Status:} Prototype \hfill \textbf{Lang:} Vue/TS\\[2mm]
+  \textbf{Purpose:} VueFlow-based visual orchestrator to design, validate, deploy infra.\\[2mm]
+  \textbf{Next Steps}
+  \begin{itemize}
+    \item Unit/e2e tests exist; wire CI.
+    \item Stabilize API contracts and error handling.
+  \end{itemize}
+  \note[item]{Great UX direction; add CI and contract tests against backend; export/import hardening.}
+\end{frame}
+
+\begin{frame}{range42-emp-mockup \; \faChalkboardTeacher}
+  \textbf{Status:} Prototype \hfill \textbf{Lang:} Vue/TS\\[2mm]
+  \textbf{Purpose:} Exercise Management Platform scaffold (routing, unit tests, basic pages).\\[2mm]
+  \textbf{Next Steps}
+  \begin{itemize}
+    \item Resolve 2 low npm advisories.
+    \item Define MVP and wire CI.
+  \end{itemize}
+  \note[item]{Seed project; define MVP/architecture first. Add CI (lint/test) \& dependency automation.}
+\end{frame}
+
+\section{Infrastructure \& Content}
+
+\begin{frame}{range42-infrastructures-installers \; \faCubes}
+  \textbf{Status:} Active \hfill \textbf{Lang:} Ansible/Shell\\[2mm]
+  \textbf{Purpose:} Bundles \& demo labs to build base VM templates, admin/student infra, service stacks.\\[2mm]
+  \textbf{Quality Gates}
+  \begin{itemize}
+    \item Add \texttt{ansible-lint} \& Molecule idempotence tests in CI.
+    \item Document secrets/vault \& inventories.
+  \end{itemize}
+  \note[item]{High impact infra content; enforce idempotence; provide reference inventories (redacted).}
+\end{frame}
+
+\begin{frame}{range42-inventory \; \faBoxes}
+  \textbf{Status:} Active \hfill \textbf{Lang:} Ansible/YAML\\[2mm]
+  \textbf{Purpose:} Vulnerable scenarios \& admin utilities; software stacks \& training assets.\\[2mm]
+  \textbf{Next Steps}
+  \begin{itemize}
+    \item Introduce scenario taxonomy \& tags.
+    \item Add CI for lint/sanity-check of roles.
+  \end{itemize}
+  \note[item]{Cornerstone repo: standardize metadata \& compatibility matrices; add dry-run checks to prevent drift.}
+\end{frame}
+
+\section{Documentation}
+
+\begin{frame}{range42-documentation-private-obsidian \; \faBook}
+  \textbf{Status:} Active \hfill \textbf{Lang:} Markdown/Shell\\[2mm]
+  \textbf{Purpose:} Private Obsidian vault (notes, canvases, API drafts, tooling).\\[2mm]
+  \textbf{Actions}
+  \begin{itemize}
+    \item Create export pipeline to public docs.
+    \item Track decisions \& version architecture canvases.
+  \end{itemize}
+  \note[item]{Add cadence for pruning; consider diagrams-as-code for reviews; plan public extraction.}
+\end{frame}
+
+% --- RISKS / GOVERNANCE ---
+\section{Risks \& Governance}
+
+\begin{frame}{Key Risks \& Gaps \; \faExclamationTriangle}
+  \begin{itemize}
+    \item \alert{No CI/CD in most repos}: enable lint, tests, security scans, release checks.
+    \item \alert{License placeholders}: finalize SPDX headers, LICENSE files.
+    \item \alert{No SECURITY policy}: define vuln disclosure and triage path.
+    \item Docs/editor config gaps: contributor friction.
+  \end{itemize}
+  \note[item]{Make CI the gate: ansible-lint, molecule, pytest, npm audit, bandit, safety/pip-audit.}
+\end{frame}
+
+% --- ROADMAP ---
+\section{Roadmap}
+
+\begin{frame}{90-Day Roadmap \; \faRoad}
+  \begin{enumerate}
+    \item \textbf{Week 1–3}: CI foundations (lint, tests, scans) across active repos.
+    \item \textbf{Week 2–5}: License \& SECURITY policies; contributor docs.
+    \item \textbf{Week 4–8}: Backend–UI contract tests; stabilize API definitions.
+    \item \textbf{Week 6–12}: Inventory taxonomy and scenario coverage matrix.
+  \end{enumerate}
+  \note[item]{Show measurable progress: CI badges, release notes, scenario matrix.}
+\end{frame}
+
+% --- DEMO PLAN ---
+\begin{frame}{Demo Plan \; \faPlay}
+  \begin{itemize}
+    \item \textbf{Scope}: Deploy \emph{demo lab} via installers; control via backend routes; visualize in Deployer UI.
+    \item \textbf{Success}: Green CI, idempotent runs, reset-to-clean-state, baseline telemetry in Wazuh.
+    \item \textbf{Artifacts}: Recorded steps, configs as code, and a short walkthrough video/GIF.
+  \end{itemize}
+  \note[item]{Keep demo focused: one scenario, full loop (deploy \textrightarrow{} observe \textrightarrow{} reset).}
+\end{frame}
+
+% --- WRAP-UP ---
+\begin{frame}{Takeaways \; \faCheck}
+  \begin{itemize}
+    \item Range42 = modular, reproducible cyber range for realistic training.
+    \item Strong building blocks; \alert{governance \& CI} are the multiplier.
+    \item Clear 90-day path to production-grade readiness.
+  \end{itemize}
+  \note[item]{Invite questions; point to repos and docs roadmap.}
+\end{frame}
+
+\end{document}
