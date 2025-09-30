@@ -44,6 +44,9 @@
 \usepackage[most]{tcolorbox}
 \tcbset{colback=black!5!cyber-bg, colframe=cyber-soft, coltext=cyber-ink, boxsep=1mm, left=2mm, right=2mm}
 
+% --- GRAPHICS ---
+\usepackage{graphicx}
+
 % --- SPEAKER NOTES ---
 \usepackage{pgfpages}
 % \setbeameroption{hide notes}
@@ -127,6 +130,20 @@
     \item \textbf{Observability}: Wazuh for logs/alerts; structured telemetry.
   \end{itemize}
   \note[item]{Emphasize modularity: builder/deployer/runner + gateway.}
+\end{frame}
+
+\begin{frame}{Architecture: Logical Components → Repository Mapping}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.95\textwidth]{images/diagrams/architecture.png}
+  \end{figure}
+  \vspace{-2mm}
+  \begin{tcolorbox}
+    \faInfoCircle\; \textbf{Left}: Logical architecture flow. \textbf{Right}: Actual GitHub repository structure.
+  \end{tcolorbox}
+  \note[item]{Left side shows logical architecture; right side shows actual GitHub repos.}
+  \note[item]{Emphasize how web components flow through API gateway to backend, which controls Proxmox via Ansible role.}
+  \note[item]{Deployable catalog (playbooks + catalog repos) contains the infrastructure-as-code content.}
 \end{frame}
 
 % === REPOSITORY AUDIT OVERVIEW ===
