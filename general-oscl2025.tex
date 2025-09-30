@@ -277,8 +277,24 @@
   \note[item]{Cornerstone content repository that needs structural stabilization, metadata standardization with scenario tags, and CI pipeline to prevent drift as content grows.}
 \end{frame}
 
-% === DOCUMENTATION ===
-\section{Documentation}
+% === DOCUMENTATION & GOVERNANCE ===
+\section{Documentation \& Governance}
+
+\begin{frame}{.github — Community Health Files \; \faUsers}
+  \textbf{Status:} Active \hfill \textbf{Commits:} 13 \hfill \textbf{Lang:} Markdown/YAML\\[2mm]
+  \textbf{Purpose:} Organization-wide default community health files to standardize CODE\_OF\_CONDUCT, CONTRIBUTING, SECURITY, issue/PR templates, and support docs across public repositories.\\[2mm]
+  \textbf{Key Findings}
+  \begin{itemize}
+    \item Centralizes community health files for all public repos.
+    \item Add CI to lint templates and validate YAML.
+    \item Document private-repo strategy and license requirements.
+  \end{itemize}
+  \begin{tcolorbox}
+    \faExclamationTriangle\; \textbf{Critical Limitation}: Defaults apply \emph{only} to public repos; private repos need local copies. LICENSE files cannot be inherited—each repo must add its own.
+  \end{tcolorbox}
+  \note[item]{This repo ensures consistent governance and contribution hygiene across Range42 public projects.}
+  \note[item]{Note that LICENSE files are per-repo and private repos won't inherit defaults; add CI to catch template regressions.}
+\end{frame}
 
 \begin{frame}{range42-documentation-private-obsidian \; \faBook}
   \textbf{Status:} Active \hfill \textbf{Commits:} 3 \hfill \textbf{Lang:} Markdown/Shell\\[2mm]
