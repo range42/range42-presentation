@@ -53,13 +53,14 @@
 
 % --- SPEAKER NOTES ---
 \usepackage{pgfpages}
+\usepackage{pdfpages}
 % \setbeameroption{hide notes}
 % \setbeameroption{show notes}
 % \setbeameroption{show only notes}
 
 % --- TITLE INFO ---
-\title{\faIcon{shield-alt}\; Range42 status update – Semi-Technical Overview}
-\subtitle{Modular Cyber Range Platform for Real-World Readiness}
+\title{\faIcon{shield-alt}\; Range42 Status Update}
+\subtitle{Open Cyber Range Platform for Collaborative Security Training}
 \author{NC3 / Range42 Team}
 \date{\today}
 \institute{\faServer\; Proxmox \quad \faCogs\; Ansible \quad \faProjectDiagram\; Orchestration \quad \faBinoculars\; Telemetry}
@@ -69,31 +70,11 @@
 % --- TITLE ---
 \begin{frame}
   \titlepage
-  \note[item]{Goal: 20-minute semi-technical tour of Range42's building blocks and current status.}
-  \note[item]{Audience: technical staff who aren't deep specialists.}
+  \note[item]{Goal: 20-minute overview of Range42's progress and community collaboration opportunities.}
+  \note[item]{Audience: open source contributors, cybersecurity educators, researchers.}
 \end{frame}
 
-% Slide for PDF page 1
-\begin{frame}[plain]
-  \centering
-  \includegraphics[
-    page=1,
-    width=\paperwidth,
-    height=\paperheight,
-    keepaspectratio
-  ]{pdf_slides/LHC_NC3.pdf}
-\end{frame}
-
-% Slide for PDF page 2
-\begin{frame}[plain]
-  \centering
-  \includegraphics[
-    page=2,
-    width=\paperwidth,
-    height=\paperheight,
-    keepaspectratio
-  ]{pdf_slides/LHC_NC3.pdf}
-\end{frame}
+\includepdf[pages={1-2}]{pdf_slides/LHC_NC3.pdf}
 
 % --- PUBLIC MONEY PUBLIC CODE ---
 \begin{frame}{Public money, public code. Let's go all the way, shall we?}
@@ -102,15 +83,15 @@
     \textbf{Current Team}
     \begin{itemize}
       \item Core development team of 3 contributors
-      \item Mix of InfoSec, DevOps engineers, and platform architects
-      \item Collaborative model with NC3 and academic partners
+      \item Mix of InfoSec \& DevOps engineers
+      \item Collab model with NC3 \& ecosystem partners
     \end{itemize}
     
     \textbf{Current Funding}
     \begin{itemize}
       \item Public grant for cyber training infrastructure
       \item Open-source model: no licensing fees, transparent development
-      \item Investment in reusable, community-tooling
+      \item Investment in reusable, community-driven tooling
     \end{itemize}
     
     \column{0.3\textwidth}
@@ -126,11 +107,18 @@
 \begin{frame}{Public money, public code. Let's go all the way, shall we?}
   \begin{columns}[T]
     \column{0.65\textwidth}
-    \textbf{Current Challenges}
+    \textbf{Why We Need Your Help}
     \begin{itemize}
-      \item Governance standardization across 13+ repositories from the get go
-      \item Balancing rapid development with documentation maturity
-      \item Recruitment, we need YOU, to apply here →
+      \item Expanding scenario coverage requires diverse security expertise
+      \item UI/UX design needs user-focused contributors
+      \item Infrastructure automation benefits from community patterns
+    \end{itemize}
+    
+    \textbf{Join Us}
+    \begin{itemize}
+      \item Open development: all code, docs, and issues public
+      \item Welcoming to first-time contributors
+      \item Apply to join the team →
     \end{itemize}
     
     \column{0.3\textwidth}
@@ -140,32 +128,51 @@
       \includegraphics[width=\textwidth]{images/work-with-us-qrcode.png}
     \end{figure}
   \end{columns}
-  \note[item]{Range42 embodies PMPC principles: taxpayer-funded development results in freely available, auditable infrastructure.}
+  \note[item]{Set collaborative tone early: this is a community project seeking contributors.}
 \end{frame}
 
 % --- AGENDA ---
 \begin{frame}{Agenda}
   \begin{enumerate}
     \item What Range42 is \& why it matters
-    \item Competitive landscape
-    \item Architecture at a glance
-    \item Repository audit findings (13 repositories analyzed)
-    \item Risks, governance, and quality gates
+    \item Current achievements \& capabilities
+    \item Architecture overview
+    \item Development tracks: where we're heading
+    \item How to contribute: scenarios, automation, UI/UX
+    \item Lessons learned \& open challenges
   \end{enumerate}
-  \note[item]{Keep flow brisk; ~3–4 min per major section.}
+  \note[item]{Keep flow brisk; emphasize collaboration opportunities throughout.}
 \end{frame}
 
 % --- WHAT IS RANGE42 ---
 \begin{frame}{What is Range42?}
   \begin{itemize}
-    \item \textbf{Modular cyber range platform} for offensive, defensive, and hybrid training.
-    \item \textbf{Reproducible IaC}: build, deploy, document labs via Proxmox, Ansible, Docker.
-    \item \textbf{Private APIs} for orchestration \& telemetry; developer toolkits for pipelines.
+    \item \textbf{Open cyber range platform} for offensive, defensive, and hybrid training
+    \item \textbf{Reproducible Infrastructure-as-Code}: Proxmox, Ansible, Docker
+    \item \textbf{Flexible \& extensible}: supports CVE labs, misconfigurations, future malware/forensics scenarios
   \end{itemize}
   \begin{tcolorbox}
     \faInfoCircle\; Built to simulate \emph{real-world incidents} safely, with isolation, snapshots, and telemetry.
   \end{tcolorbox}
-  \note[item]{Anchor on "safe realism": isolation, resets, data trails.}
+  \note[item]{Anchor on "safe realism" and extensibility for different training types.}
+\end{frame}
+
+% --- CURRENT ACHIEVEMENTS ---
+\begin{frame}{Current Achievements \; \faCheckCircle}
+  \textbf{What's Working Today}
+  \begin{itemize}
+    \item \alert{~100 CVEs \& misconfigurations identified} across common technologies
+    \item \alert{~20 scenarios currently deployable} for hands-on training
+    \item \textbf{Automated provisioning} on Proxmox with networking, VPN, firewalling
+    \item \textbf{Integrated monitoring} via Wazuh for telemetry and alerting
+    \item \textbf{13 repositories} managing automation, content, and tooling
+  \end{itemize}
+  \vspace{2mm}
+  \begin{tcolorbox}
+    \faLightbulb\; \textbf{Key Milestone}: Platform is functional and actively used for internal training exercises.
+  \end{tcolorbox}
+  \note[item]{Emphasize concrete progress: this isn't vaporware, it's a working platform.}
+  \note[item]{Highlight the gap: 100 identified but only 20 deployable = opportunity for contribution.}
 \end{frame}
 
 % --- COMPETITIVE LANDSCAPE ---
@@ -196,13 +203,14 @@
 % --- ARCH OVERVIEW ---
 \begin{frame}{Architecture at a Glance}
   \begin{itemize}
-    \item \textbf{Hypervisor layer}: Proxmox VMs/LXCs; snapshots; network segments.
-    \item \textbf{Automation layer}: Ansible roles orchestrate lifecycle, network, firewall, images.
-    \item \textbf{Control plane}: Backend API (routes for VM/Net/Runner); Kong gateway.
-    \item \textbf{UX}: Deployer UI (visual design), EMP mockup (exercise mgmt), trainee access.
-    \item \textbf{Observability}: Wazuh for logs/alerts; structured telemetry.
+    \item \textbf{Hypervisor layer}: Proxmox VMs/LXCs; snapshots; network segments
+    \item \textbf{Automation layer}: Ansible roles orchestrate lifecycle, network, firewall, images
+    \item \textbf{Control plane}: Backend API (routes for VM/Net/Runner); Kong gateway
+    \item \textbf{UX}: Deployer UI (visual designer), EMP mockup (exercise management)
+    \item \textbf{Observability}: Wazuh for logs/alerts; structured telemetry
   \end{itemize}
   \note[item]{Emphasize modularity: builder/deployer/runner + gateway.}
+  \note[item]{Each layer is extensible and welcomes contributions.}
 \end{frame}
 
 \begin{frame}{Architecture: Logical Components → Repository Mapping}
@@ -215,254 +223,280 @@
     \faInfoCircle\; \textbf{Left}: Logical architecture flow. \textbf{Right}: Actual GitHub repository structure.
   \end{tcolorbox}
   \note[item]{Left side shows logical architecture; right side shows actual GitHub repos.}
-  \note[item]{Emphasize how web components flow through API gateway to backend, which controls Proxmox via Ansible role.}
+  \note[item]{Web components flow through API gateway to backend, which controls Proxmox via Ansible.}
   \note[item]{Deployable catalog (playbooks + catalog repos) contains the infrastructure-as-code content.}
 \end{frame}
 
-% === REPOSITORY AUDIT OVERVIEW ===
-\section{Repository Audit Findings}
+% === DEVELOPMENT TRACKS ===
+\section{Development Tracks}
 
-\begin{frame}{Organization-Wide Audit Results \; \faClipboardCheck}
+\begin{frame}{Where We're Heading: Three Development Tracks \; \faRoad}
+  \begin{enumerate}
+    \item \textbf{Expand Vulnerability \& Misconfiguration Inventory}
+    \begin{itemize}
+      \item Goal: Increase from 20 to 50+ deployable scenarios
+      \item Cover diverse technologies: web, network, cloud, containers
+      \item Community contributions welcome for CVE research and deployment automation
+    \end{itemize}
+    
+    \item \textbf{Advance Lab Designer from PoC to Production}
+    \begin{itemize}
+      \item Visual node-based infrastructure designer (VueFlow)
+      \item Instructor-friendly: drag-and-drop scenario composition
+      \item Export to Ansible playbooks for deployment
+    \end{itemize}
+    
+    \item \textbf{Multi-Subnet Infrastructure Support}
+    \begin{itemize}
+      \item Simulate complex enterprise networks (DMZ, internal, management zones)
+      \item Advanced firewall rules and traffic segmentation
+      \item Support for red team / blue team exercises
+    \end{itemize}
+  \end{enumerate}
+  \note[item]{These are the three tracks from the abstract - concrete, achievable goals.}
+\end{frame}
+
+% === KEY REPOSITORIES ===
+\section{Key Repositories}
+
+\begin{frame}{Organization Overview \; \faClipboardCheck}
   \textbf{13 Repositories Analyzed} (2 public, 11 private)\\[3mm]
   
-  \textbf{Critical Findings}
+  \textbf{Current State}
   \begin{itemize}
-    \item \alert{9/13 repositories} have LICENSE template placeholders (\texttt{<year>}, \texttt{<name of author>})
-    \item \alert{13/13 repositories} missing SECURITY.md vulnerability disclosure policy
-    \item \alert{12/13 repositories} have no CI/CD pipeline
-    \item \alert{0 repositories} have all required governance files
+    \item \alert{Strong security baseline}: Zero high-severity findings across all code scans
+    \item \alert{Governance standardization in progress}: LICENSE, SECURITY, CI/CD, contributor docs
+    \item \alert{Active development}: 179 commits (devkit), 125 (backend), 108 (proxmox controller)
   \end{itemize}
   \vspace{2mm}
   \begin{tcolorbox}
-    \faCheckCircle\; \textbf{Good News}: Zero high-severity security findings across all code scans (bandit, pip-audit, npm audit).
+    \faUsers\; \textbf{Contribution Opportunities}: Help us complete governance files, add CI pipelines, and expand scenario coverage.
   \end{tcolorbox}
-  \note[item]{Sanity check performed 2025-09-30 using gh-repo-organizer tool.}
-  \note[item]{Security posture is excellent; governance is the primary gap.}
-\end{frame}
-
-% === REPOSITORY MANAGEMENT TOOL ===
-\begin{frame}{gh-repo-organizer: Audit Tool \; \faDownload}
-  \textbf{Status:} Active \hfill \textbf{Commits:} 18 \hfill \textbf{Lang:} Bash\\[2mm]
-  \textbf{Purpose:} Bash script for mass cloning and auditing GitHub organization repositories with comprehensive standards compliance checking.\\[2mm]
-  \textbf{Key Features}
-  \begin{itemize}
-    \item Production-ready tool for mass repository cloning and standards auditing
-    \item Detects LICENSE template placeholders, missing documentation, and CI/CD configurations
-    \item Zero security findings; needs CI pipeline and contributor documentation
-  \end{itemize}
-  \note[item]{This tool generated the audit findings you just saw.}
-  \note[item]{It's production-ready but needs CI integration and contributor guidelines for full maturity.}
-\end{frame}
-
-\begin{frame}{Repository Standards Compliance Checks}
-  \faClipboardCheck\;
-  \textbf{Automated Sanity Checks Performed}
-  \begin{itemize}
-    \item \textbf{License Validation}: LICENSE files with template placeholder detection
-    \item \textbf{Documentation}: README, CHANGELOG, CONTRIBUTING, SECURITY policies
-    \item \textbf{Git Configuration}: .gitignore, .editorconfig standards
-    \item \textbf{CI/CD Detection}: GitHub Actions, GitLab CI, Jenkins, Travis, etc.
-    \item \textbf{Templates}: Issue/PR templates, CODE OF CONDUCT
-  \end{itemize}
-  \begin{tcolorbox}
-    \faInfoCircle\; Directly addresses governance gaps: \emph{license placeholders, missing SECURITY policies, CI/CD standardization}.
-  \end{tcolorbox}
-  \note[item]{Tool provides automated compliance checking across the entire organization.}
-\end{frame}
-
-% === AUTOMATION LAYER ===
-\section{Automation}
-
-\begin{frame}{range42-ansible\_roles-private-devkit \; \faTerminal}
-  \textbf{Status:} Active \hfill \textbf{Commits:} 179 \hfill \textbf{Lang:} Shell\\[2mm]
-  \textbf{Purpose:} Helper scripts for Proxmox and Ansible operations including VM/LXC management, firewall rules, and JSON transformations.\\[2mm]
-  \textbf{Key Findings}
-  \begin{itemize}
-    \item DevKit provides 100+ helper scripts following strict naming convention
-    \item Zero Bandit findings; actively used with 179 commits but lacks CI pipeline
-    \item Priority: finalize LICENSE placeholders and add governance documentation
-  \end{itemize}
-  \note[item]{Mature and heavily used repository with excellent naming conventions.}
-  \note[item]{Top priority is adding CI with shellcheck/shfmt and completing governance files.}
+  \note[item]{Frame governance gaps as opportunities for contribution, not problems.}
+  \note[item]{Emphasize security is solid - we need help with structure and scale.}
 \end{frame}
 
 \begin{frame}{range42-ansible\_roles-proxmox\_controller \; \faCogs}
   \textbf{Status:} Active \hfill \textbf{Commits:} 108 \hfill \textbf{Lang:} Ansible/YAML\\[2mm]
-  \textbf{Purpose:} Ansible role for managing Proxmox nodes via API: VMs, LXC containers, networking, storage, firewall, and snapshots.\\[2mm]
-  \textbf{Key Findings}
+  \textbf{Purpose:} Core automation for managing Proxmox nodes via API: VMs, LXC containers, networking, storage, firewall, and snapshots.\\[2mm]
+  \textbf{Contribution Opportunities}
   \begin{itemize}
-    \item Comprehensive Ansible role managing full Proxmox lifecycle with 108 commits
-    \item Broad functionality coverage but lacks CI pipeline for ansible-lint and idempotence tests
-    \item Immediate actions: finalize LICENSE, add CI, and document variables with examples
+    \item Add CI pipeline with ansible-lint and Molecule idempotence tests
+    \item Document role variables and provide example playbooks
+    \item Extend functionality for advanced networking scenarios
   \end{itemize}
-  \note[item]{Core infrastructure role with strong breadth.}
-  \note[item]{Needs production hardening through CI with ansible-lint and Molecule.}
+  \note[item]{Core infrastructure automation - heart of the platform.}
+  \note[item]{Great entry point for Ansible contributors.}
 \end{frame}
-
-% === CONTROL PLANE ===
-\section{Control Plane}
 
 \begin{frame}{range42-backend-api \; \faProjectDiagram}
-  \textbf{Status:} Active \hfill \textbf{Commits:} 125 \hfill \textbf{Lang:} Python/Shell/YAML\\[2mm]
+  \textbf{Status:} Active \hfill \textbf{Commits:} 125 \hfill \textbf{Lang:} Python/FastAPI\\[2mm]
   \textbf{Purpose:} FastAPI backend orchestrating Proxmox deployments via Ansible, with routes for VM control, networking, and bundle execution.\\[2mm]
-  \textbf{Key Findings}
+  \textbf{Contribution Opportunities}
   \begin{itemize}
-    \item FastAPI backend with 125 commits; clean security scans (bandit, pip-audit, safety)
-    \item Comprehensive route structure for Proxmox control and bundle orchestration
-    \item Production hardening needed: add CI pipeline, unit tests, finalize LICENSE, SECURITY policy
+    \item Add unit tests and integration tests with pytest
+    \item Improve error handling and validation
   \end{itemize}
-  \note[item]{Well-structured backend with excellent security posture.}
-  \note[item]{Priority actions are adding CI with pytest and completing governance documentation.}
+  \note[item]{Well-structured backend with clean security scans.}
+  \note[item]{Good target for Python/API developers.}
 \end{frame}
-
-\begin{frame}{range42-api-definitions \; \faSitemap}
-  \textbf{Status:} Stale \hfill \textbf{Commits:} 5 \hfill \textbf{Lang:} JSON\\[2mm]
-  \textbf{Purpose:} Placeholder repository for OpenAPI/Swagger specifications defining the Range42 backend API contracts.\\[2mm]
-  \textbf{Key Findings}
-  \begin{itemize}
-    \item Placeholder repository with OpenAPI specs but minimal content and only 5 commits
-    \item Missing LICENSE file entirely; needs decision on archive versus active development
-    \item If kept: seed with comprehensive API definitions and add CI for spec validation
-  \end{itemize}
-  \note[item]{Decision point: either archive to reduce noise or commit to making it the single source of API truth.}
-\end{frame}
-
-\begin{frame}{range42-api-gw \; \faIcon{shield-alt}}
-  \textbf{Status:} Active \hfill \textbf{Commits:} 5 \hfill \textbf{Lang:} N/A\\[2mm]
-  \textbf{Purpose:} Kong API Gateway configuration for authentication, ACL, and access control policies in front of backend API.\\[2mm]
-  \textbf{Key Findings}
-  \begin{itemize}
-    \item Kong API Gateway repository for authentication and access control with minimal content
-    \item LICENSE has template placeholders; needs Kong declarative configs or deployment manifests
-    \item Add documentation for Kong setup, plugin configuration, and integration with backend API
-  \end{itemize}
-  \note[item]{Early-stage repository that needs Kong configuration files and deployment guides.}
-  \note[item]{Critical for production security but currently underdeveloped.}
-\end{frame}
-
-% === UX LAYERS ===
-\section{UX Layers}
 
 \begin{frame}{range42-deployer-ui \; \faDrawPolygon}
-  \textbf{Status:} Prototype \hfill \textbf{Commits:} 28 \hfill \textbf{Lang:} Vue/TS\\[2mm]
+  \textbf{Status:} Prototype \hfill \textbf{Commits:} 28 \hfill \textbf{Lang:} Vue/TypeScript\\[2mm]
   \textbf{Purpose:} VueFlow-based visual orchestrator for designing, validating, and deploying Range42 infrastructure through node-based interface.\\[2mm]
-  \textbf{Key Findings}
+  \textbf{Contribution Opportunities}
   \begin{itemize}
-    \item VueFlow-based UI with node-based infrastructure design; unit/e2e tests exist but no CI
-    \item Good UX foundation with i18n support and localStorage data management
-    \item Wire CI for automated testing, stabilize API contracts with backend, resolve npm advisory
+    \item UI/UX improvements for instructor workflows
+    \item Integration testing with backend API
+    \item Export/import hardening for scenario sharing
   \end{itemize}
-  \note[item]{Promising prototype with solid testing foundation.}
-  \note[item]{Key next steps are enabling CI to run existing tests and hardening API contract validation.}
+  \note[item]{This is the "lab designer" mentioned in development tracks.}
+  \note[item]{Great opportunity for frontend/UX contributors.}
 \end{frame}
 
-\begin{frame}{range42-emp-mockup \; \faChalkboardTeacher}
-  \textbf{Status:} Prototype \hfill \textbf{Commits:} 1 \hfill \textbf{Lang:} Vue/TS\\[2mm]
-  \textbf{Purpose:} Exercise Management Platform scaffold with basic Vue 3 routing, TypeScript setup, and unit test foundation.\\[2mm]
-  \textbf{Key Findings}
+\begin{frame}{range42-playbooks \& range42-catalog \; \faCubes}
+  \textbf{Status:} Active \hfill \textbf{Commits:} 75 + 91 \hfill \textbf{Lang:} Ansible/YAML\\[2mm]
+  \textbf{Purpose:} Centralized orchestration playbooks and reusable content catalog for deploying vulnerable scenarios and infrastructure bundles.\\[2mm]
+  \textbf{Contribution Opportunities}
   \begin{itemize}
-    \item Exercise Management Platform seed project with 1 commit; basic Vue 3 scaffold only
-    \item Missing LICENSE entirely; has 2 low npm advisories and no CI pipeline
-    \item Define MVP scope and architecture first, then add CI and resolve dependency vulnerabilities
+    \item \alert{Add new CVE scenarios}: research, document, automate deployment
+    \item Introduce scenario taxonomy and tagging system
+    \item Document compatibility matrices and dependencies
   \end{itemize}
-  \note[item]{Very early prototype requiring architectural definition before development continues.}
-  \note[item]{Must add LICENSE, resolve npm advisories, and establish CI pipeline once MVP scope is clear.}
+  \note[item]{Content repositories - where the 100 CVEs live.}
+  \note[item]{This is the highest-impact area for security researchers to contribute.}
 \end{frame}
 
-% === INFRASTRUCTURE & CONTENT ===
-\section{Infrastructure \& Content}
+% === HOW TO CONTRIBUTE ===
+\section{How to Contribute}
 
-\begin{frame}{range42-playbooks \; \faCubes}
-  \textbf{Status:} Active \hfill \textbf{Commits:} 75 \hfill \textbf{Lang:} Ansible/YAML\\[2mm]
-  \textbf{Purpose:} Centralized Ansible playbooks organizing scenarios and bundles for CLI or backend API orchestration of infrastructure deployments.\\[2mm]
-  \textbf{Key Findings}
-  \begin{itemize}
-    \item Central playbook repository with 75 commits organizing scenarios and reusable bundles
-    \item Clear structure with test scripts but no CI for ansible-lint or syntax validation
-    \item Add CI pipeline, introduce scenario taxonomy with tags, and document compatibility matrices
-  \end{itemize}
-  \note[item]{Well-organized orchestration layer with good separation between scenarios and bundles.}
-  \note[item]{Needs CI enforcement for ansible-lint and comprehensive documentation.}
-\end{frame}
-
-\begin{frame}{range42-catalog \; \faBoxes}
-  \textbf{Status:} Active \hfill \textbf{Commits:} 91 \hfill \textbf{Lang:} Ansible/YAML\\[2mm]
-  \textbf{Purpose:} Collection of reusable Ansible roles and Docker/Compose stacks for deploying vulnerable scenarios and infrastructure bundles.\\[2mm]
-  \textbf{Key Findings}
-  \begin{itemize}
-    \item Catalog of Ansible roles and Docker stacks for deploying training scenarios with 91 commits
-    \item Volatile tree structure organizing CVEs and misconfigurations by technology type
-    \item Add CI for ansible-lint, introduce scenario taxonomy with tags, and finalize LICENSE
-  \end{itemize}
-  \note[item]{Cornerstone content repository that needs structural stabilization and metadata standardization.}
-\end{frame}
-
-% === DOCUMENTATION & GOVERNANCE ===
-\section{Documentation \& Governance}
-
-\begin{frame}{.github – Community Health Files \; \faUsers}
-  \textbf{Status:} Active \hfill \textbf{Commits:} 13 \hfill \textbf{Lang:} Markdown/YAML\\[2mm]
-  \textbf{Purpose:} Organization-wide default community health files to standardize CODE\_OF\_CONDUCT, CONTRIBUTING, SECURITY, issue/PR templates across public repositories.\\[2mm]
-  \textbf{Key Findings}
-  \begin{itemize}
-    \item Centralizes community health files for all public repos
-    \item Add CI to lint templates and validate YAML
-    \item Document private-repo strategy and license requirements
-  \end{itemize}
+\begin{frame}{How to Contribute \; \faUsers}
+  \textbf{Three Primary Contribution Paths}\\[3mm]
+  
+  \begin{columns}[T]
+    \column{0.3\textwidth}
+    \textbf{Scenario Design}
+    \begin{itemize}
+      \item CVE research
+      \item Misconfig labs
+      \item Documentation
+    \end{itemize}
+    
+    \column{0.35\textwidth}
+    \textbf{Infrastructure Automation}
+    \begin{itemize}
+      \item Ansible roles/playbooks
+      \item Backend API features
+      \item CI/CD pipelines
+    \end{itemize}
+    
+    \column{0.3\textwidth}
+    \textbf{UI/UX Design}
+    \begin{itemize}
+      \item Lab designer
+      \item Exercise mgmt
+      \item User workflows
+    \end{itemize}
+  \end{columns}
+  \vspace{5mm}
   \begin{tcolorbox}
-    \faExclamationTriangle\; \textbf{Critical Limitation}: Defaults apply \emph{only} to public repos; private repos need local copies. LICENSE files cannot be inherited.
+    \faGithub\; \textbf{Get Started}: Visit \texttt{github.com/range42} (public repos) or contact us for private repo access.
   \end{tcolorbox}
-  \note[item]{Ensures consistent governance across Range42 public projects.}
-  \note[item]{LICENSE files are per-repo and private repos won't inherit defaults.}
+  \note[item]{Make contributing concrete: three clear paths with specific tasks.}
+  \note[item]{Mention both public repos and process for private repo contributions.}
 \end{frame}
 
-\begin{frame}{range42-documentation-private-obsidian \; \faBook}
-  \textbf{Status:} Active \hfill \textbf{Commits:} 3 \hfill \textbf{Lang:} Markdown/Shell\\[2mm]
-  \textbf{Purpose:} Private Obsidian vault containing architecture canvases, meeting notes, API drafts, and internal documentation.\\[2mm]
-  \textbf{Key Findings}
+\begin{frame}{Getting Started: Choose \& Setup}
+  \textbf{Step 1: Choose Your Path}
   \begin{itemize}
-    \item Private Obsidian vault with architecture canvases and internal documentation; 3 commits only
-    \item Contains valuable schemas and meeting notes but lacks public documentation export pipeline
-    \item Create automated export to public docs, version control architecture canvases, add pruning cadence
+    \item Browse open issues on GitHub (labeled "good first issue" and "help wanted")
+    \item Review scenario inventory to find gaps in coverage
+    \item Check documentation for areas needing clarity
   \end{itemize}
-  \note[item]{Knowledge management repository that needs regular maintenance cadence.}
-  \note[item]{Consider diagrams-as-code for architecture to enable version control and reviews.}
+  
+  \textbf{Step 2: Set Up Your Environment}
+  \begin{itemize}
+    \item Fork repositories and clone locally
+    \item Follow setup guides in README files
+    \item Join our communication channels (contact us for access)
+  \end{itemize}
+  \note[item]{First two steps: discovery and environment setup.}
 \end{frame}
 
-% === RISKS & GOVERNANCE ===
-\section{Risks \& Governance}
-
-\begin{frame}{Key Risks \& Gaps \; \faExclamationTriangle}
-  \textbf{Governance \& Quality}
+\begin{frame}{Getting Started: Contribute \& Engage}
+  \textbf{Step 3: Submit Your Contribution}
   \begin{itemize}
-    \item \alert{LICENSE placeholders in 9/13 repos}: Replace \texttt{<year>} and \texttt{<name of author>} with actual values
-    \item \alert{No SECURITY.md in any repo}: Define vulnerability disclosure and triage process
-    \item \alert{No CI/CD in 12/13 repos}: Enable lint, tests, security scans, release checks
-    \item \alert{Missing contributor docs}: Add CONTRIBUTING.md, .editorconfig standards
+    \item Create pull request with clear description
+    \item Ensure tests pass (where CI exists)
+    \item Engage with code review feedback
+  \end{itemize}
+  
+  \textbf{What to Expect}
+  \begin{itemize}
+    \item Friendly, constructive code reviews
+    \item Response within 3-5 business days
+    \item Recognition in contributors list and release notes
+  \end{itemize}
+  \note[item]{Final step plus expectations to encourage new contributors.}
+\end{frame}
+
+% === LESSONS LEARNED ===
+\section{Lessons Learned}
+
+\begin{frame}{Lessons Learned \; \faLightbulb}
+  \textbf{What We've Discovered}\\[3mm]
+  
+  \textbf{Technical Insights}
+  \begin{itemize}
+    \item \alert{Ansible + Proxmox API = powerful combo} for IaC cyber ranges
+    \item Snapshot/restore capabilities are critical for training resets
+    \item Telemetry integration from day one simplifies troubleshooting
+  \end{itemize}
+\end{frame}
+  
+\begin{frame}{Lessons Learned \; \faLightbulb}
+  \textbf{Process \& Collaboration}
+  \begin{itemize}
+    \item \alert{Governance overhead is real}: LICENSE, SECURITY, CI/CD take time but unlock collaboration
+    \item Documentation maturity lags code development (common open source challenge)
+    \item Balancing rapid prototyping with production-ready standards
   \end{itemize}
   \vspace{2mm}
-  \textbf{Technical Debt}
+  \begin{tcolorbox}
+    \faHandshake\; \textbf{Community Benefits}: Diverse perspectives improve scenario realism and platform robustness.
+  \end{tcolorbox}
+  \note[item]{Be honest about challenges - it builds trust with contributors.}
+  \note[item]{Emphasize that these are normal open source growing pains.}
+\end{frame}
+
+% === OPEN CHALLENGES ===
+\begin{frame}{Open Challenges \& Opportunities \; \faExclamationTriangle}
+  \textbf{Where We Need Help}\\[3mm]
+  
+  \textbf{Governance \& Quality}
   \begin{itemize}
-    \item API contract formalization needed between backend and UI
-    \item Scenario taxonomy and compatibility matrix documentation
-    \item Stale repositories need archive-or-activate decisions
+    \item Enable CI/CD pipelines (ansible-lint, pytest, npm audit)
+    \item Add contributor documentation and onboarding guides
   \end{itemize}
-  \note[item]{Make CI the gate: ansible-lint, molecule, pytest, npm audit, bandit, safety/pip-audit.}
+  
+  \textbf{Technical Scaling}
+  \begin{itemize}
+    \item Expand scenario coverage from 20 to 50+ deployable labs
+    \item Support multi-subnet architectures for complex exercises
+  \end{itemize}
+  \vspace{2mm}
+  \begin{tcolorbox}
+    \faUsers\; \textbf{Your Expertise Matters}: Every contribution - code, docs, testing, design - moves the platform forward.
+  \end{tcolorbox}
+  \note[item]{Frame challenges as opportunities for impactful contributions.}
 \end{frame}
 
 % === WRAP-UP ===
-\begin{frame}{Takeaways \; \faCheck}
+\begin{frame}{Range42: Today \& Tomorrow \; \faCheckCircle}
+  \textbf{What We've Built}
   \begin{itemize}
-    \item Range42 = modular, reproducible cyber range for realistic training
-    \item \alert{Strong security baseline}: Zero high-severity findings across all code
-    \item \alert{Governance is the multiplier}: LICENSE, SECURITY, CI/CD, and contributor docs
-    \item Focus areas: complete governance files, enable CI, formalize API contracts
+    \item Open, modular cyber range with ~20 deployable scenarios
+    \item Strong security baseline: zero high-severity findings
+    \item Clear architecture with multiple contribution paths
+    \item Active development: 13 repositories, 500+ commits
   \end{itemize}
   \vspace{3mm}
-  \begin{tcolorbox}
-    \faLightbulb\; \textbf{Current Priority}: Fix LICENSE placeholders, add SECURITY.md, enable CI across all active repos.
-  \end{tcolorbox}
-  \note[item]{Invite questions; emphasize that security is solid, governance unlocks collaboration.}
+  \textbf{What We're Building}
+  \begin{itemize}
+    \item 50+ scenario coverage across diverse technologies
+    \item Production-ready lab designer for instructors
+    \item Multi-subnet support for advanced training exercises
+  \end{itemize}
+  \note[item]{Summary slide: current state and future direction.}
+\end{frame}
+
+\begin{frame}{Get Involved \; \faRocket}
+  \begin{columns}[T]
+    \column{0.65\textwidth}
+    \textbf{Join the Range42 Community}\\[3mm]
+    
+    \textbf{Contribution Areas}
+    \begin{itemize}
+      \item \textbf{Scenario Design}: CVE research, automation
+      \item \textbf{Infrastructure}: Ansible roles, backend API, CI/CD
+      \item \textbf{UI/UX}: Lab designer, EMP UI
+    \end{itemize}
+    \vspace{3mm}
+    \textbf{Contact \& Resources}
+    \begin{itemize}
+      \item GitHub: \texttt{github.com/range42}
+      \item Email: \texttt{steve.clement@nc3.lu}
+    \end{itemize}
+    
+    \column{0.3\textwidth}
+    \vspace{0mm}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{images/contribute.png}
+      \caption*{\footnotesize github.com/range42}
+    \end{figure}
+  \end{columns}
+  \note[item]{Final call to action with clear next steps and contact information.}
 \end{frame}
 
 \end{document}
