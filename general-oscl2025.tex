@@ -157,6 +157,64 @@
   \note[item]{Reduce noise or make it the single source of API truth.}
 \end{frame}
 
+
+% Insert this after the "What is Range42?" frame and before "Architecture at a Glance"
+
+% --- COMPETITIVE LANDSCAPE ---
+\begin{frame}{Range42 vs. Other Cyber Ranges}
+  \begin{table}
+    \scriptsize
+    \begin{tabular}{l|cccc}
+      \textbf{Feature} & \textbf{Range42} & \textbf{Commercial SaaS} & \textbf{Cloud Native} & \textbf{Traditional} \\
+      \hline
+      \alert{Open Architecture} & \checkmark & \texttimes & \texttimes & \texttimes \\
+      \alert{IaC/GitOps} & \checkmark & \textasciitilde & \checkmark & \texttimes \\
+      Private Deployment & \checkmark & \texttimes & \textasciitilde & \checkmark \\
+      Cost Control & \checkmark & \texttimes & \textasciitilde & \checkmark \\
+      Full Data Custody & \checkmark & \texttimes & \texttimes & \checkmark \\
+      API Orchestration & \checkmark & \checkmark & \checkmark & \texttimes \\
+      Rapid Reset/Snapshots & \checkmark & \checkmark & \textasciitilde & \textasciitilde \\
+      Custom Scenarios & \checkmark & \texttimes & \textasciitilde & \checkmark \\
+    \end{tabular}
+  \end{table}
+  \vspace{2mm}
+  \begin{tcolorbox}
+    \faLightbulb\; \textbf{Range42's Edge}: Full control, reproducibility, and cost-effectiveness without vendor lock-in.
+  \end{tcolorbox}
+  \note[item]{Emphasize open architecture and IaC as key differentiators.}
+  \note[item]{Commercial SaaS: SimSpace, Immersive Labs, RangeForce, Cyberbit.}
+  \note[item]{Cloud Native: AWS/Azure ranges, cloud-specific solutions.}
+  \note[item]{Traditional: Physical labs, legacy virtualized platforms.}
+\end{frame}
+
+% Alternative: Feature comparison with more detail
+\begin{frame}{Why Range42? Key Differentiators}
+  \begin{columns}[t]
+    \column{0.5\textwidth}
+    \textbf{vs. Commercial SaaS} \\[2mm]
+    \begin{itemize}
+      \item \alert{Full data custody} (no external telemetry)
+      \item \alert{No per-seat licensing} (fixed infra cost)
+      \item \alert{Unlimited customization} (scenarios as code)
+      \item Deploy on-premises or private cloud
+    \end{itemize}
+    
+    \column{0.5\textwidth}
+    \textbf{vs. Traditional Ranges} \\[2mm]
+    \begin{itemize}
+      \item \alert{Reproducible IaC} (version-controlled)
+      \item \alert{API-driven automation} (no manual setup)
+      \item \alert{Fast reset cycles} (snapshots in seconds)
+      \item Modern observability stack
+    \end{itemize}
+  \end{columns}
+  \vspace{4mm}
+  \begin{tcolorbox}
+    \faCheckCircle\; \textbf{Best of Both Worlds}: Enterprise automation + full control + transparent costs.
+  \end{tcolorbox}
+  \note[item]{Highlight hybrid approach: modern automation without vendor lock-in.}
+\end{frame}
+
 \section{UX Layers}
 
 \begin{frame}{range42-deployer-ui \; \faDrawPolygon}
@@ -229,6 +287,72 @@
     \item Docs/editor config gaps: contributor friction.
   \end{itemize}
   \note[item]{Make CI the gate: ansible-lint, molecule, pytest, npm audit, bandit, safety/pip-audit.}
+\end{frame}
+
+% Additional slides for Range42 presentation - GitHub Repository Cloner
+% Insert these slides after the "Risks & Governance" section
+
+\section{Repository Management}
+
+\begin{frame}{GitHub Organization Repository Cloner}
+  \faDownload\;
+  \textbf{Status:} Production Ready \hfill \textbf{Lang:} Bash/Shell\\[2mm]
+  \textbf{Purpose:} Mass clone and audit all Range42 repositories with comprehensive standards compliance checking.\\[2mm]
+  \textbf{Key Features}
+  \begin{itemize}
+    \item \alert{Mass Repository Cloning}: Clone all accessible org repositories automatically.
+    \item \alert{Smart Organization}: Separates public/private repos into dedicated directories.
+    \item \alert{Comprehensive Audits}: Standards compliance checking with line-by-line output.
+  \end{itemize}
+  \note[item]{Production tool actively used for Range42 org management; reduces manual overhead.}
+\end{frame}
+
+\begin{frame}{Repository Standards Compliance}
+  \faClipboardCheck\;
+  \textbf{Automated Sanity Checks}
+  \begin{itemize}
+    \item \textbf{License Validation}: LICENSE files with template placeholder detection.
+    \item \textbf{Documentation}: README, CHANGELOG, CONTRIBUTING, SECURITY policies.
+    \item \textbf{Git Configuration}: .gitignore, .editorconfig standards.
+    \item \textbf{CI/CD Detection}: GitHub Actions, GitLab CI, Jenkins, Travis, etc.
+    \item \textbf{Templates}: Issue/PR templates, CODE OF CONDUCT.
+  \end{itemize}
+  \begin{tcolorbox}
+    \faInfoCircle\; Addresses governance gaps: \emph{license placeholders, missing SECURITY policies, CI/CD standardization}.
+  \end{tcolorbox}
+  \note[item]{Directly addresses the governance risks identified earlier; automated compliance checking.}
+\end{frame}
+
+\begin{frame}{Cloner Usage and Benefits}
+  \faTerminal\;
+  \textbf{Quick Commands} (clone all, audit all, check specific repo)
+  \begin{tcolorbox}
+    \texttt{./gh\_repo\_cloner.sh}\\[2mm]
+    \texttt{./gh\_repo\_cloner.sh --sanity-check}\\[2mm]
+    \texttt{./gh\_repo\_cloner.sh -s range42-backend-api}
+  \end{tcolorbox}
+  \textbf{Governance Benefits}
+  \begin{itemize}
+    \item Batch identification of repos missing LICENSE/SECURITY files.
+    \item \alert{CI/CD detection} across all repositories.
+    \item Focused analysis for onboarding and code reviews.
+  \end{itemize}
+  \note[item]{Practical tool that supports the governance roadmap; measurable compliance metrics.}
+\end{frame}
+
+\begin{frame}{Integration with Range42 Roadmap}
+  \faRocket\;
+  \textbf{Supports 90-Day Goals}
+  \begin{itemize}
+    \item \textbf{Week 1-3}: Identify repos needing CI foundations via automated audit.
+    \item \textbf{Week 2-5}: Batch detection of missing LICENSE and SECURITY policies.
+    \item \textbf{Week 4-8}: Track backend-UI contract compliance across repos.
+    \item \textbf{Ongoing}: Monthly audits for standards drift prevention.
+  \end{itemize}
+  \begin{tcolorbox}
+    \faLightbulb\; \textbf{Measurable Progress}: Generate compliance dashboards and track improvement over time.
+  \end{tcolorbox}
+  \note[item]{Tool becomes enabler for roadmap execution; provides metrics for demo milestones.}
 \end{frame}
 
 % --- ROADMAP ---
