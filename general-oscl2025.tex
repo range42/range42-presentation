@@ -49,12 +49,12 @@
 
 % --- SPEAKER NOTES ---
 \usepackage{pgfpages}
-% \setbeameroption{hide notes}
+\setbeameroption{hide notes}
 % \setbeameroption{show notes}
 % \setbeameroption{show only notes}
 
 % --- TITLE INFO ---
-\title{\faIcon{shield-alt}\; Range42 — Semi-Technical Overview}
+\title{\faIcon{shield-alt}\; Range42 status update — Semi-Technical Overview}
 \subtitle{Modular Cyber Range Platform for Real-World Readiness}
 \author{NC3 / Range42 Team}
 \date{\today}
@@ -65,8 +65,48 @@
 % --- TITLE ---
 \begin{frame}
   \titlepage
+  \vspace{-5mm}
+  \begin{tcolorbox}
+    \textbf{TLP:CLEAR} — Information may be shared freely without restriction.
+  \end{tcolorbox}
   \note[item]{Goal: 20-minute semi-technical tour of Range42's building blocks and roadmap.}
   \note[item]{Audience: technical staff who aren't deep specialists.}
+\end{frame}
+
+% --- PUBLIC MONEY PUBLIC CODE ---
+\begin{frame}{Public money, public code. Let's go all the way, shall we?}
+  \begin{columns}[T]
+    \column{0.65\textwidth}
+    \textbf{Current Team}
+    \begin{itemize}
+      \item Core development team of 3-5 contributors
+      \item Mix of security researchers, DevOps engineers, and platform architects
+      \item Collaborative model with NC3 and academic partners
+    \end{itemize}
+    
+    \textbf{Current Funding}
+    \begin{itemize}
+      \item Public sector grant funding for cyber training infrastructure
+      \item Open-source model: no licensing fees, transparent development
+      \item Investment in reusable, community-owned tooling
+    \end{itemize}
+    
+    \textbf{Current Challenges}
+    \begin{itemize}
+      \item Governance standardization across 13+ repositories
+      \item Balancing rapid development with documentation maturity
+      \item Sustainable maintenance model as project scales
+    \end{itemize}
+    
+    \column{0.3\textwidth}
+    \vspace{10mm}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{images/logos/FSFE_Public_Money_Public_Code_logo.pdf}
+    \end{figure}
+  \end{columns}
+  \note[item]{Emphasize public funding → public ownership → public benefit.}
+  \note[item]{Range42 embodies PMPC principles: taxpayer-funded development results in freely available, auditable infrastructure.}
 \end{frame}
 
 % --- AGENDA ---
