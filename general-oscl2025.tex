@@ -5,6 +5,10 @@
 \usetheme[numbering=fraction,progressbar=head]{metropolis}
 \setbeamersize{text margin left=8mm,text margin right=8mm}
 
+% --- CUSTOM FOOTER WITH TLP MARKING ---
+\setbeamertemplate{frame footer}{\textbf{TLP:CLEAR} — Information may be shared freely without restriction.}
+\setbeamercolor{frame footer}{fg=cyber-accent}
+
 % --- FONTS (XeLaTeX) ---
 \usepackage{fontspec}
 \setsansfont[
@@ -49,12 +53,12 @@
 
 % --- SPEAKER NOTES ---
 \usepackage{pgfpages}
-\setbeameroption{hide notes}
+% \setbeameroption{hide notes}
 % \setbeameroption{show notes}
 % \setbeameroption{show only notes}
 
 % --- TITLE INFO ---
-\title{\faIcon{shield-alt}\; Range42 status update — Semi-Technical Overview}
+\title{\faIcon{shield-alt}\; Range42 — Semi-Technical Overview}
 \subtitle{Modular Cyber Range Platform for Real-World Readiness}
 \author{NC3 / Range42 Team}
 \date{\today}
@@ -65,10 +69,6 @@
 % --- TITLE ---
 \begin{frame}
   \titlepage
-  \vspace{-5mm}
-  \begin{tcolorbox}
-    \textbf{TLP:CLEAR} — Information may be shared freely without restriction.
-  \end{tcolorbox}
   \note[item]{Goal: 20-minute semi-technical tour of Range42's building blocks and roadmap.}
   \note[item]{Audience: technical staff who aren't deep specialists.}
 \end{frame}
