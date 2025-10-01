@@ -58,17 +58,22 @@
 % \setbeameroption{show notes}
 % \setbeameroption{show only notes}
 
+% --- SPACING IMPROVEMENTS ---
+% Reduce spacing in itemize/enumerate globally for Beamer
+\setbeamertemplate{itemize/enumerate body begin}{\vspace{-0.5ex}}
+\setbeamertemplate{itemize/enumerate subbody begin}{\vspace{-0.5ex}}
+
 % --- TITLE INFO ---
 \title{\faIcon{shield-alt}\; Range42 Status Update}
 \subtitle{Open Cyber Range Platform for Collaborative Security Training}
-\author{NC3 / Range42 Team}
+\author{NC3 / Range42 Team - Steve Clement}
 \date{\today}
 \institute{\faServer\; Proxmox \quad \faCogs\; Ansible \quad \faProjectDiagram\; Orchestration \quad \faBinoculars\; Telemetry}
 
 \begin{document}
 
 % --- TITLE ---
-\begin{frame}
+\begin{frame}[plain]
   \titlepage
   \note[item]{Goal: 20-minute overview of Range42's progress and community collaboration opportunities.}
   \note[item]{Audience: open source contributors, cybersecurity educators, researchers.}
@@ -77,7 +82,7 @@
 \includepdf[pages={1-2}]{pdf_slides/LHC_NC3.pdf}
 
 % --- PUBLIC MONEY PUBLIC CODE ---
-\begin{frame}{Public money, public code. Let's go all the way, shall we?}
+\begin{frame}[shrink=8]{Public money, public code. Let's go all the way, shall we?}
   \begin{columns}[T]
     \column{0.65\textwidth}
     \textbf{Current Team}
@@ -95,7 +100,7 @@
     \end{itemize}
     
     \column{0.3\textwidth}
-    \vspace{5mm}
+    \vspace{2mm}
     \begin{figure}
       \centering
       \includegraphics[width=\textwidth]{images/logos/FSFE_Public_Money_Public_Code_logo.pdf}
@@ -104,7 +109,7 @@
   \note[item]{Emphasize public funding → public ownership → public benefit.}
 \end{frame}
 
-\begin{frame}{Public money, public code. Let's go all the way, shall we?}
+\begin{frame}[squeeze]{Public money, public code. Let's go all the way, shall we?}
   \begin{columns}[T]
     \column{0.65\textwidth}
     \textbf{Why We Need Your Help}
@@ -176,9 +181,9 @@
 \end{frame}
 
 % --- COMPETITIVE LANDSCAPE ---
-\begin{frame}{Range42 vs. Other Cyber Ranges}
+\begin{frame}[shrink=5]{Range42 vs. Other Cyber Ranges}
   \begin{table}
-    \scriptsize
+    \tiny\color{cyber-ink}
     \begin{tabular}{l|cccc}
       \textbf{Feature} & \textbf{Range42} & \textbf{Commercial SaaS} & \textbf{Cloud Native} & \textbf{Traditional} \\
       \hline
@@ -192,7 +197,7 @@
       Custom Scenarios & \checkmark & \texttimes & \textasciitilde & \checkmark \\
     \end{tabular}
   \end{table}
-  \vspace{2mm}
+  \vspace{1mm}
   \begin{tcolorbox}
     \faLightbulb\; \textbf{Range42's Edge}: Full control, reproducibility, and cost-effectiveness without vendor lock-in.
   \end{tcolorbox}
@@ -201,7 +206,7 @@
 \end{frame}
 
 % --- ARCH OVERVIEW ---
-\begin{frame}{Architecture at a Glance}
+\begin{frame}[squeeze]{Architecture at a Glance}
   \begin{itemize}
     \item \textbf{Hypervisor layer}: Proxmox VMs/LXCs; snapshots; network segments
     \item \textbf{Automation layer}: Ansible roles orchestrate lifecycle, network, firewall, images
@@ -230,7 +235,7 @@
 % === DEVELOPMENT TRACKS ===
 \section{Development Tracks}
 
-\begin{frame}{Where We're Heading: Three Development Tracks \; \faRoad}
+\begin{frame}[shrink=5]{Where We're Heading: Three Development Tracks \; \faRoad}
   \begin{enumerate}
     \item \textbf{Expand Vulnerability \& Misconfiguration Catalog}
     \begin{itemize}
@@ -259,8 +264,8 @@
 % === KEY REPOSITORIES ===
 \section{Key Repositories}
 
-\begin{frame}{Organization Overview \; \faClipboardCheck}
-  \textbf{13 Repositories Analyzed} (2 public, 11 private)\\[3mm]
+\begin{frame}[squeeze]{Organization Overview \; \faClipboardCheck}
+  \textbf{13 Repositories Analyzed} (2 public, 11 private)\\[2mm]
   
   \textbf{Current State}
   \begin{itemize}
@@ -268,7 +273,7 @@
     \item \alert{Governance standardization in progress}: LICENSE, SECURITY, CI/CD, contributor docs
     \item \alert{Active development}: 179 commits (devkit), 125 (backend), 108 (proxmox controller)
   \end{itemize}
-  \vspace{2mm}
+  \vspace{1mm}
   \begin{tcolorbox}
     \faUsers\; \textbf{Contribution Opportunities}: Help us complete governance files, add CI pipelines, and expand scenario coverage.
   \end{tcolorbox}
@@ -276,7 +281,7 @@
   \note[item]{Emphasize security is solid - we need help with structure and scale.}
 \end{frame}
 
-\begin{frame}{range42-ansible\_roles-proxmox\_controller \; \faCogs}
+\begin{frame}[squeeze]{range42-ansible\_roles-proxmox\_controller \; \faCogs}
   \textbf{Status:} Active \hfill \textbf{Commits:} 108 \hfill \textbf{Lang:} Ansible/YAML\\[2mm]
   \textbf{Purpose:} Core automation for managing Proxmox nodes via API: VMs, LXC containers, networking, storage, firewall, and snapshots.\\[2mm]
   \textbf{Contribution Opportunities}
@@ -289,7 +294,7 @@
   \note[item]{Great entry point for Ansible contributors.}
 \end{frame}
 
-\begin{frame}{range42-backend-api \; \faProjectDiagram}
+\begin{frame}[squeeze]{range42-backend-api \; \faProjectDiagram}
   \textbf{Status:} Active \hfill \textbf{Commits:} 125 \hfill \textbf{Lang:} Python/FastAPI\\[2mm]
   \textbf{Purpose:} FastAPI backend orchestrating Proxmox deployments via Ansible, with routes for VM control, networking, and bundle execution.\\[2mm]
   \textbf{Contribution Opportunities}
@@ -301,7 +306,7 @@
   \note[item]{Good target for Python/API developers.}
 \end{frame}
 
-\begin{frame}{range42-deployer-ui \; \faDrawPolygon}
+\begin{frame}[squeeze]{range42-deployer-ui \; \faDrawPolygon}
   \textbf{Status:} Prototype \hfill \textbf{Commits:} 28 \hfill \textbf{Lang:} Vue/TypeScript\\[2mm]
   \textbf{Purpose:} VueFlow-based visual orchestrator for designing, validating, and deploying Range42 infrastructure through node-based interface.\\[2mm]
   \textbf{Contribution Opportunities}
@@ -314,7 +319,7 @@
   \note[item]{Great opportunity for frontend/UX contributors.}
 \end{frame}
 
-\begin{frame}{range42-playbooks \& range42-catalog \; \faCubes}
+\begin{frame}[squeeze]{range42-playbooks \& range42-catalog \; \faCubes}
   \textbf{Status:} Active \hfill \textbf{Commits:} 75 + 91 \hfill \textbf{Lang:} Ansible/YAML\\[2mm]
   \textbf{Purpose:} Centralized orchestration playbooks and reusable content catalog for deploying vulnerable scenarios and infrastructure bundles.\\[2mm]
   \textbf{Contribution Opportunities}
@@ -330,8 +335,8 @@
 % === HOW TO CONTRIBUTE ===
 \section{How to Contribute}
 
-\begin{frame}{How to Contribute \; \faUsers}
-  \textbf{Three Primary Contribution Paths}\\[3mm]
+\begin{frame}[squeeze]{How to Contribute \; \faUsers}
+  \textbf{Three Primary Contribution Paths}\\[2mm]
   
   \begin{columns}[T]
     \column{0.3\textwidth}
@@ -358,7 +363,7 @@
       \item User workflows
     \end{itemize}
   \end{columns}
-  \vspace{5mm}
+  \vspace{3mm}
   \begin{tcolorbox}
     \faGithub\; \textbf{Get Started}: Visit \texttt{github.com/range42} (public repos) or contact us for private repo access.
   \end{tcolorbox}
@@ -366,7 +371,7 @@
   \note[item]{Mention both public repos and process for private repo contributions.}
 \end{frame}
 
-\begin{frame}{Getting Started: Choose \& Setup}
+\begin{frame}[squeeze]{Getting Started: Choose \& Setup}
   \textbf{Step 1: Choose Your Path}
   \begin{itemize}
     \item Browse open issues on GitHub (labeled "good first issue" and "help wanted")
@@ -406,8 +411,8 @@
 % === LESSONS LEARNED ===
 \section{Lessons Learned}
 
-\begin{frame}{Lessons Learned \; \faLightbulb}
-  \textbf{What We've Discovered}\\[3mm]
+\begin{frame}[squeeze]{Lessons Learned \; \faLightbulb}
+  \textbf{What We've Discovered}\\[2mm]
   
   \textbf{Technical Insights}
   \begin{itemize}
@@ -417,7 +422,7 @@
   \end{itemize}
 \end{frame}
   
-\begin{frame}{Lessons Learned \; \faLightbulb}
+\begin{frame}[squeeze]{Lessons Learned \; \faLightbulb}
   \textbf{Process \& Collaboration}
   \begin{itemize}
     \item \alert{Governance overhead is real}: LICENSE, SECURITY, CI/CD take time but unlock collaboration
@@ -429,8 +434,8 @@
 \end{frame}
 
 % === OPEN CHALLENGES ===
-\begin{frame}{Open Challenges \& Opportunities \; \faExclamationTriangle}
-  \textbf{Where We Need Help}\\[3mm]
+\begin{frame}[squeeze]{Open Challenges \& Opportunities \; \faExclamationTriangle}
+  \textbf{Where We Need Help}\\[2mm]
   
   \textbf{Governance \& Quality}
   \begin{itemize}
@@ -443,7 +448,7 @@
     \item Expand scenario coverage from 20 to 50+ deployable labs
     \item Support multi-subnet architectures for complex exercises
   \end{itemize}
-  \vspace{2mm}
+  \vspace{1mm}
   \begin{tcolorbox}
     \faUsers\; \textbf{Your Expertise Matters}: Every contribution - code, docs, testing, design - moves the platform forward.
   \end{tcolorbox}
@@ -451,7 +456,7 @@
 \end{frame}
 
 % === WRAP-UP ===
-\begin{frame}{Range42: Today \& Tomorrow \; \faCheckCircle}
+\begin{frame}[squeeze]{Range42: Today \& Tomorrow \; \faCheckCircle}
   \textbf{What We've Built}
   \begin{itemize}
     %\item Open, modular cyber range with ~20 deployable scenarios
@@ -460,7 +465,7 @@
     \item Clear architecture with multiple contribution paths
     \item Active development: 13 repositories, 500+ commits
   \end{itemize}
-  \vspace{3mm}
+  \vspace{2mm}
   \textbf{What We're Building}
   \begin{itemize}
     \item 50+ scenario coverage across diverse technologies
@@ -470,10 +475,10 @@
   \note[item]{Summary slide: current state and future direction.}
 \end{frame}
 
-\begin{frame}{Get Involved \; \faRocket}
+\begin{frame}[squeeze]{Get Involved \; \faRocket}
   \begin{columns}[T]
     \column{0.65\textwidth}
-    \textbf{Join the Range42 Community}\\[3mm]
+    \textbf{Join the Range42 Community}\\[2mm]
     
     \textbf{Contribution Areas}
     \begin{itemize}
@@ -481,7 +486,7 @@
       \item \textbf{Infrastructure}: Ansible roles, backend API, CI/CD
       \item \textbf{UI/UX}: Lab designer, EMP UI
     \end{itemize}
-    \vspace{3mm}
+    \vspace{2mm}
     \textbf{Contact \& Resources}
     \begin{itemize}
       \item GitHub: \texttt{github.com/range42}

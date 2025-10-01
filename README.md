@@ -71,6 +71,7 @@ The presentations use these fonts (must be installed system-wide):
 - **IBM Plex Sans** - Primary sans-serif font
 - **IBM Plex Mono** - Monospace font for code
 - **Fira Sans** - Alternative sans-serif
+- **Fira Mono** - Alternative Monospace font
 
 **Installation:**
 
