@@ -9,6 +9,8 @@
 \setbeamertemplate{frame footer}{\textbf{TLP:CLEAR} – Information may be shared freely without restriction.}
 \setbeamercolor{frame footer}{fg=cyber-accent}
 
+\usepackage{amsmath}
+
 % --- FONTS (XeLaTeX) ---
 \usepackage{fontspec}
 \setsansfont[
@@ -48,12 +50,14 @@
 \usepackage[most]{tcolorbox}
 \tcbset{colback=black!5!cyber-bg, colframe=cyber-soft, coltext=cyber-ink, boxsep=1mm, left=2mm, right=2mm}
 
+% --- PDF TOOLS ---
+\usepackage{pdfpages}
+
 % --- GRAPHICS ---
 \usepackage{graphicx}
 
 % --- SPEAKER NOTES ---
 \usepackage{pgfpages}
-\usepackage{pdfpages}
 % \setbeameroption{hide notes}
 % \setbeameroption{show notes}
 % \setbeameroption{show only notes}
@@ -95,7 +99,7 @@
     \textbf{Current Funding}
     \begin{itemize}
       \item Public grant for cyber training infrastructure
-      \item Open-source model: no licensing fees, transparent development
+      \item FOSS model: no licensing \textcolor{green}{\faMoneyBill}, transparent development
       \item Investment in reusable, community-driven tooling
     \end{itemize}
     
@@ -121,9 +125,9 @@
     
     \textbf{Join Us}
     \begin{itemize}
-      \item Open development: all code, docs, and issues public
+      \item Open dev: all code, docs, and issues are public
       \item Welcoming to first-time contributors
-      \item Apply to join the team →
+      \item Apply to join the team $\xrightarrow{\hspace{4cm}}$
     \end{itemize}
     
     \column{0.3\textwidth}
@@ -170,7 +174,7 @@
     %\item \alert{~20 scenarios currently deployable} for hands-on training
     \item \textbf{Automated provisioning} on Proxmox with networking, VPN, firewalling
     \item \textbf{Integrated monitoring} via Wazuh for telemetry and alerting
-    \item \textbf{13 repositories} managing automation, content, and tooling
+    \item \textbf{14 repositories} managing automation, content, and tooling
   \end{itemize}
   \vspace{2mm}
   \begin{tcolorbox}
@@ -265,7 +269,7 @@
 \section{Key Repositories}
 
 \begin{frame}[squeeze]{Organization Overview \; \faClipboardCheck}
-  \textbf{13 Repositories Analyzed} (2 public, 11 private)\\[2mm]
+  \textbf{14 Repositories Analyzed} (10 public, 4 private)\\[2mm]
   
   \textbf{Current State}
   \begin{itemize}
@@ -489,16 +493,21 @@
     \vspace{1mm}
     \textbf{Contact \& Resources}
     \begin{itemize}
+      \item Web: \texttt{range42.lu}
       \item GitHub: \texttt{github.com/range42}
       \item Email: \texttt{steve.clement@nc3.lu}
     \end{itemize}
+
+   \vspace{2\baselineskip}
+    \noindent \textcolor{white}{Typeset with \LaTeX{}} {\textcolor{blue}{\faHeart}}
+
     
     \column{0.3\textwidth}
     \vspace{0mm}
     \begin{figure}
       \centering
       \includegraphics[width=\textwidth]{images/contribute.png}
-      \caption*{\footnotesize github.com/range42}
+      \caption*{\footnotesize \textcolor{white}{github.com/range42}}
     \end{figure}
   \end{columns}
   \note[item]{Final call to action with clear next steps and contact information.}
