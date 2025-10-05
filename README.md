@@ -53,15 +53,11 @@ xelatex general-oscl2025.tex
 Install via `tlmgr`:
 
 ```bash
-sudo tlmgr install beamertheme-metropolis
-sudo tlmgr install pgfopts
-sudo tlmgr install fira
-sudo tlmgr install plex
-sudo tlmgr install tcolorbox
-sudo tlmgr install tikzfill
-sudo tlmgr install pdfcol
-sudo tlmgr install fontawesome5
-sudo tlmgr install fontspec
+# OSCL Tex dependencies
+sudo tlmgr install beamertheme-metropolis fira pgfopts fira plex tcolorbox tikzfill pdfcol fontawesome5 fontspec
+
+# CyCon template needs the following
+sudo tlmgr install titlesec enumitem titling preprint
 ```
 
 ### Required Fonts
