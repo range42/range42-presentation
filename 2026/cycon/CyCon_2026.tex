@@ -68,18 +68,17 @@ We curate an catalog of $\sim$100 CVEs/misconfigurations (with $\sim$20 currentl
 
 \section{Scenario Description Standard}
 
-\textbf{Dual-layer standard.} We standardize scenarios with a dual representation: 
-(i) a \emph{human-readable} layer (narrative, learning objectives, context, and both technical and non-technical injects); and 
-(ii) a \emph{machine-ingestible} schema (JSON/YAML) that encodes actors, assets, networks, triggers, dependencies, and scoring. 
+\textbf{Dual-layer standard.} We standardize scenarios with a dual representation:
+(i) a \emph{human-readable} layer (narrative, learning objectives, context, and both technical and non-technical injects); and
+(ii) a \emph{machine-ingestible} schema (JSON/YAML) that encodes actors, assets, networks, triggers, dependencies, and scoring.
 A bidirectional mapping preserves consistency between the narrative and the structured specification.
 
-\textbf{Lifecycle and validation.} Authors draft the human-readable scenario, which is compiled into the machine schema. 
-Automated validators check syntax, dependency closure, resource bounds, and security constraints prior to ingestion. 
+\textbf{Lifecycle and validation.} Authors draft the human-readable scenario, which is compiled into the machine schema.
+Automated validators check syntax, dependency closure, resource bounds, and security constraints prior to ingestion.
 Rejected builds include actionable diagnostics; accepted builds become catalog entries with semantic versioning.
 
-\textbf{LLM assistance.} The standard is designed to leverage LLMs to propose both the human narrative and the machine schema from a prompt (e.g., ``simulate a ransomware intrusion across three subnets''). 
+\textbf{LLM assistance.} The standard is designed to leverage LLMs to propose both the human narrative and the machine schema from a prompt (e.g., ``simulate a ransomware intrusion across three subnets'').
 Outputs are \emph{never} trusted blindly: they pass through the same validation pipeline and require human approval before catalog admission and deployment.
-
 We define a domain-specific schema (YAML / JSON hybrid) for scenario narratives. A scenario file includes sections like: background story, objectives, inject schedule, scoring rules, triggers, technical blueprint. From this human-readable form, we generate canonical machine-readable JSON which Range42 ingests to deploy and run the scenario. We include validation logic to catch schema errors or dependency mismatches.
 
 \section{Integration \& Deployment Pipeline}
@@ -90,20 +89,25 @@ We built a proof-of-concept workflow: given a prompt (e.g. “simulate a ransomw
 
 \section{Evaluation}
 
-\textbf{Quantitative anchors.} The current catalog covers approximately 100 curated CVEs/misconfigurations with roughly 20 \emph{deployable} scenario modules. 
+\textbf{Quantitative anchors.} The current catalog covers approximately 100 curated CVEs/misconfigurations with roughly 20 \emph{deployable} scenario modules.
 Core automation status (from internal work packages): hypervisor automation $\sim$80\%, network topology automation $\sim$70\%, baseline catalog initialization $\sim$25\%.
 
-\textbf{Metrics.} We report (i) ingestion success rate (schema validation pass/fail), (ii) deployment latency for typical lab topologies (VM- and container-based), and (iii) reproducibility across repeated runs. 
+\textbf{Metrics.} We report (i) ingestion success rate (schema validation pass/fail), (ii) deployment latency for typical lab topologies (VM- and container-based), and (iii) reproducibility across repeated runs.
 Where infrastructure constraints limit scale tests, we complement with instructor/operator feedback and failure-mode analyses (e.g., image sprawl, secret handling, routing edge cases).
-
 We measure catalog ingestion success rate, scenario consistency (i.e. narrative vs deployed topology), deployment latency, and reusability across runs. Where full metrics are limited, we include qualitative feedback from instructors and early users.
 
 \section{Discussion}
 
-\textbf{Governance and federation.} A community catalog requires contribution guidelines, schema versioning strategy, and automated QA (linting, policy checks). 
+\textbf{Governance and federation.} A community catalog requires contribution guidelines, schema versioning strategy, and automated QA (linting, policy checks).
 We envision cross-institution \emph{catalog federation} where trusted peers exchange signed scenario components, enabling shared curricula and comparable experiments.
 
 \textbf{Standardization impact.} A widely adopted scenario standard lowers authoring friction, enables portable exercises, and allows third-party tools (including LLM-driven assistants) to integrate safely.
+
+\textbf{Synergies with NGSOTI.} 
+We identify strong architectural and conceptual overlap with the \emph{Next Generation Security Operator Training Infrastructure (NGSOTI)} project~\cite{ngsoti2025}, 
+which focuses on modular, open architectures for distributed cyber range operations. 
+Range42 aims to cooperate with NGSOTI and re-use compatible components where feasible --- particularly around orchestration pipelines, scenario interoperability, and federated data exchange. 
+This alignment ensures that both projects contribute toward a shared European ecosystem of interoperable, open, and extensible cyber training infrastructures.
 
 We reflect on expressivity vs. enforceable constraints, schema versioning, contribution governance, catalog federation across platforms, and operational challenges (e.g. schema drift, extension conflicts). The choice of “catalog” (versus “catalog”) is rooted in the alignment with Ansible’s modular, declarative paradigm, and the desire for interoperability.
 
@@ -123,5 +127,12 @@ Automated ranges like Range42 help \emph{secure tomorrow} by enabling hands-on r
 \bibitem{tailscale} Tailscale Documentation. Available: \url{https://tailscale.com/kb/}
 \bibitem{ieee} IEEE Editorial Style Manual. Available: \url{https://journals.ieeeauthorcenter.ieee.org/}
 \end{thebibliography}
+
+
+\section*{Use of AI tools and human oversight}
+The authors disclose that AI-assisted tools were used to aid editing parts of this manuscript, notably for re-organizing content, spellchecking, counter checking examples by contradiction, and checking of stylguide correctness.
+All substantive technical claims, architectural designs, and empirical data were authored, verified, and approved by the human authors.
+Automated outputs were reviewed and revised by subject-matter experts to ensure accuracy, safety, and compliance with ethical standards.
+This acknowledgement is provided in accordance with academic best practices for transparency in the use of AI-assisted tools.
 
 \end{document}
