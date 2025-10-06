@@ -1,0 +1,34 @@
+{
+	"nodes":[
+		{"id":"7408c90e65534cb4","type":"group","x":-760,"y":-540,"width":820,"height":559,"label":"REPOSITORIES STRUCTURE"},
+		{"id":"2139b72b89f2748b","x":-1580,"y":-540,"width":670,"height":559,"type":"group","label":"PROJECT OVERVIEW"},
+		{"id":"2bb64ca2333ea0d0","type":"group","x":-1560,"y":-473,"width":290,"height":306,"color":"5","label":"WEB COMPONENTS"},
+		{"id":"6c4e4f728100761e","type":"group","x":-740,"y":-473,"width":290,"height":306,"color":"5","label":"WEB COMPONENTS"},
+		{"id":"47a30732e2e2a840","type":"group","x":-1220,"y":-216,"width":290,"height":215,"color":"1","label":"DEPLOYABLE CATALOG"},
+		{"id":"c51d0efbec83c330","type":"group","x":-260,"y":-216,"width":290,"height":200,"color":"1","label":"DEPLOYABLE CATALOG"},
+		{"id":"59d78dc6aea9dc5e","type":"text","text":"VIRTUAL MACHINE","x":-1200,"y":-196,"width":250,"height":60,"color":"1"},
+		{"id":"4a7368ac4ec19dc5","type":"text","text":"DOCKER","x":-1200,"y":-136,"width":250,"height":60,"color":"1"},
+		{"id":"4f83e8f5d6ae2224","type":"text","text":"LXC","x":-1200,"y":-76,"width":250,"height":60,"color":"1"},
+		{"id":"7ac39ecacfe4bc51","type":"text","text":"DEPLOYER-UI","x":-1540,"y":-453,"width":250,"height":60,"color":"5"},
+		{"id":"3edf0e2d656a80bd","type":"text","text":"API GATEWAY","x":-1540,"y":-347,"width":250,"height":60,"color":"5"},
+		{"id":"4b7681002abbe343","type":"text","text":"DEPLOYER API","x":-1540,"y":-247,"width":250,"height":60,"color":"5"},
+		{"id":"6249e8dd2c68686d","type":"text","text":"PROXMOX","x":-1540,"y":-106,"width":250,"height":60},
+		{"id":"feb78943237c3357","type":"text","text":"range42-api-gw","x":-720,"y":-347,"width":250,"height":60,"color":"5"},
+		{"id":"e93dffe8790dd731","type":"text","text":"range42-backend-api","x":-720,"y":-247,"width":250,"height":60,"color":"5"},
+		{"id":"ab26215d5fbbb0a7","type":"text","text":"range42-ansible_roles-proxmox_controller","x":-720,"y":-106,"width":400,"height":60},
+		{"id":"b116de92d8df065a","type":"text","text":"range42-deployer-ui","x":-720,"y":-453,"width":250,"height":60,"color":"5"},
+		{"id":"b58bef694014eea1","type":"text","text":"range42-playbooks","x":-240,"y":-196,"width":250,"height":60,"color":"1"},
+		{"id":"93d2de78a83eff32","type":"text","text":"range42-catalog","x":-240,"y":-106,"width":250,"height":60,"color":"1"}
+	],
+	"edges":[
+		{"id":"1651146ec1252c64","fromNode":"47a30732e2e2a840","fromSide":"left","toNode":"6249e8dd2c68686d","toSide":"right","toEnd":"none","color":"1"},
+		{"id":"4acccac4aef91290","fromNode":"7ac39ecacfe4bc51","fromSide":"bottom","toNode":"3edf0e2d656a80bd","toSide":"top","color":"5"},
+		{"id":"ab157ac1258188d5","fromNode":"3edf0e2d656a80bd","fromSide":"bottom","toNode":"4b7681002abbe343","toSide":"top","color":"5"},
+		{"id":"398ffe596d150686","fromNode":"2bb64ca2333ea0d0","fromSide":"bottom","toNode":"6249e8dd2c68686d","toSide":"top","toEnd":"none"},
+		{"id":"c08755f4850901e5","fromNode":"6c4e4f728100761e","fromSide":"bottom","toNode":"ab26215d5fbbb0a7","toSide":"top","toEnd":"none"},
+		{"id":"a17479dba8e6e52b","fromNode":"c51d0efbec83c330","fromSide":"left","toNode":"ab26215d5fbbb0a7","toSide":"right","toEnd":"none","color":"1"},
+		{"id":"252ceab83dff428a","fromNode":"b116de92d8df065a","fromSide":"bottom","toNode":"feb78943237c3357","toSide":"top","color":"5"},
+		{"id":"e6dea4d3a1225bf7","fromNode":"feb78943237c3357","fromSide":"bottom","toNode":"e93dffe8790dd731","toSide":"top","color":"5"},
+		{"id":"5df019d42b99b6ec","fromNode":"b58bef694014eea1","fromSide":"bottom","toNode":"93d2de78a83eff32","toSide":"top"}
+	]
+}
