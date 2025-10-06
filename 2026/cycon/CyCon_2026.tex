@@ -35,7 +35,7 @@
 \begin{abstract}
 The future of cyber conflict demands training platforms that anticipate tomorrow's threats rather than replicate yesterday's incidents. This paper presents Range42~\cite{range42}, an open cyber range developed by the National Cybersecurity Competence Center (NC3~\cite{NC3}) under the Luxembourg House of Cybersecurity~\cite{LHC} together with DIGISQUAD~\cite{DIGISQUAD}. Range42 lowers barriers to building realistic, reproducible training environments through automation and community collaboration.
 
-Our research introduces two core contributions and a future standard. First, we describe an extensible catalog system of vulnerable and misconfigured environments. With over 100 curated CVEs and misconfigurations identified and approximately 20 already deployable, this system enables structured reproduction of real-world attack surfaces for controlled experiments. Second, we detail an orchestration framework capable of deploying multi-subnet infrastructures, making it possible to simulate complex enterprise-grade networks with isolation and fidelity. Finally we want to develop a scenario standard language for cyber ranges, well knowing that quite a few efforts already exist yet none englobes the entire process of a cyber range exercise. Bearing this in mind we will develop a baseline on the Common EXercise Format~\cite{cexf}, inspect the Open Cyber Range SDL~\cite{SDL} (Scenario Defined Language) and consider the findings of the KYPO Cyber Range~\cite{kypo2020} We highlight a proof-of-concept LLM-assisted workflow: prompt → scenario narrative + schema → validation → ingestion; this enables fast, potentially innovative and always up to date on the current threat landscape and the most common attacks.
+Our research introduces two core contributions and a future standard. First, we describe an extensible catalog system of vulnerable and misconfigured environments. With over 100 curated CVEs and misconfigurations identified and approximately 20 already deployable, this system enables structured reproduction of real-world attack surfaces for controlled experiments. Second, we detail an orchestration framework capable of deploying multi-subnet infrastructures, making it possible to simulate complex enterprise-grade networks with isolation and fidelity. Finally we want to develop a scenario standard language for cyber ranges, well knowing that quite a few efforts already exist yet none englobes the entire process of a cyber range exercise. Bearing this in mind we will develop a baseline on the Common EXercise Format~\cite{cexf}, inspect the Open Cyber Range SDL~\cite{SDL} (Scenario Defined Language) and consider the findings of the Automating the Generation of Cyber Range Virtual Scenarios with VSDL~\cite{vsdl2022} We highlight a proof-of-concept LLM-assisted workflow: prompt → scenario narrative + schema → validation → ingestion; this enables fast, potentially innovative and always up to date on the current threat landscape and the most common attacks.
 
 We propose \textbf{range42-catalog}, a modular, open catalog of vulnerable and misconfigured environments, designed for extensibility, interoperability, and community-driven growth. The catalog aligns with our Ansible-based architecture and supports declarative scenario assembly across tools.
 
@@ -52,7 +52,36 @@ We present \textbf{Range42}, an open cyber range platform emphasizing automation
 We also explore an experimental LLM-assisted pipeline to generate scenarios from prompts, enabling rapid scenario creation that remains current with the evolving threat landscape. Playing hundreds of generated scenarios to extract telemetry might provide valuable datasets for security analytics research, especially when paired with real-world incident data and digital twins of documented breaches.
 
 \section{Related Work}
-Existing cyber range catalogs or scenario repositories tend to be closed, bespoke, or tightly coupled to particular platforms. Some efforts provide deployment DSLs or scripts, but few support a human-editable narrative plus structured schema, or offer APIs for third-party tooling. We review virtual scenario description languages, shared scenario repositories, and limitations in openness and interoperability.
+
+\textbf{Cyber range platforms.}
+Several academic and commercial cyber ranges address cybersecurity training needs but face limitations in openness and interoperability.
+KYPO Cyber Range~\cite{kypo2020} demonstrates scalable approaches using OpenStack and sandbox orchestration for hands-on cybersecurity education, achieving impressive deployment efficiency through containerization and automation. However, KYPO relies on platform-specific tooling for scenario management and lacks standardized interfaces for cross-platform scenario exchange.
+Commercial platforms like SimSpace~\cite{simspace}, Immersive Labs~\cite{immersive}, RangeForce~\cite{rangeforce}, and Cyberbit~\cite{cyberbit} offer rich features including realistic enterprise environments and automated assessment, but impose vendor lock-in, lack transparent architectures, and prevent community contribution to scenario catalogs.
+Open-source efforts exist but often remain tightly coupled to specific infrastructure choices, limiting portability and collaborative development.
+
+\textbf{Scenario description languages.}
+The Open Cyber Range SDL provides a YAML-based specification for defining training scenarios with infrastructure components, network topologies, and service configurations. While SDL enables declarative scenario definitions, it focuses primarily on technical infrastructure without integrated narrative layers, learning objective frameworks, or mechanisms for LLM-assisted generation.
+MISP's Common Exercise Format (CEXF) enables exercise information sharing across organizations through structured metadata, event timelines, and inject specifications. CEXF excels at exercise documentation and inter-organizational coordination but does not include deployment automation, orchestration primitives, or runtime scenario execution capabilities.
+Other domain-specific languages exist for specific platforms but lack standardization efforts enabling cross-platform compatibility.
+Range42 builds on these efforts by combining human-readable narratives with machine-executable schemas in a unified framework, supporting both manual authoring and automated generation while maintaining deployment platform flexibility.
+
+\textbf{Automation and orchestration.}
+Infrastructure-as-Code (IaC) approaches using Ansible, Terraform, and Kubernetes have been successfully applied to cyber range deployment~\cite{kypo2020}, enabling reproducible infrastructure provisioning and configuration management.
+However, existing solutions often couple scenarios tightly to specific platforms, making cross-platform scenario portability difficult.
+Containerization technologies like Docker~\cite{docker} provide lightweight virtualization for rapid deployment but require careful orchestration for complex multi-subnet scenarios.
+Range42's catalog-driven architecture with extension APIs enables platform-agnostic scenario definitions while maintaining deployment flexibility through abstraction layers that map high-level scenario specifications to platform-specific orchestration logic.
+
+\textbf{LLM-assisted security training.}
+Recent work explores using large language models for generating cybersecurity training content, automated vulnerability detection, and threat scenario synthesis.
+While LLMs demonstrate impressive capabilities in understanding security concepts and generating plausible training materials, concerns around hallucination, inappropriate content generation, and security risks remain significant barriers to production deployment.
+Range42 addresses these challenges through mandatory validation pipelines that verify technical correctness, dependency consistency, and security constraints before any LLM-generated content reaches production deployment.
+Human-in-the-loop approval ensures subject matter expert review, while constraint enforcement prevents generation of harmful or inappropriate scenarios.
+This approach balances the efficiency gains of LLM assistance with the safety requirements of operational training platforms.
+
+\textbf{Open-source community models.}
+The MISP project~\cite{misp} demonstrates successful community-driven development of cybersecurity tooling through open standards, transparent governance, and collaborative innovation.
+MISP's threat intelligence sharing platform achieved widespread adoption by prioritizing interoperability, providing clear contribution pathways, and fostering an inclusive community culture.
+Range42 adopts similar principles, aiming to build a federated ecosystem of cyber training platforms through standardized scenario formats, open catalog architectures, and community-driven content development.
 
 \section{System Architecture \& Catalog Design}
 Range42 operates via Proxmox, Ansible, and container/VM integration.  
@@ -203,11 +232,20 @@ Automated ranges like Range42 help \emph{secure tomorrow} by enabling hands-on r
 \bibitem{DIGISQUAD} DIGISQUAD: \url{https://www.digisquad.com/}
 \bibitem{cexf} MISP Common Exercise Format: \url{https://github.com/MISP/cexf}
 \bibitem{SDL} Open Cyber Range SDL: \url{https://documentation.opencyberrange.ee/docs/sdl/reference/}
-\bibitem{kypo2020} J. Vykopal, P. Čeleda, P. Seda, V. Švábenský, and D. Tovarňák, 
-``Scalable Learning Environments for Teaching Cybersecurity Hands-on,'' 
-in \textit{2020 IEEE Frontiers in Education Conference (FIE)}, 
-Uppsala, Sweden, 2020, pp. 1--9, doi: 10.1109/FIE44824.2020.9274085.
+\bibitem{vsdl2022} G. Costa, E. Russo, and A. Armando, 
+``Automating the Generation of Cyber Range Virtual Scenarios with VSDL,'' 
+\textit{Journal of Wireless Mobile Networks, Ubiquitous Computing, and Dependable Applications (JoWUA)}, 
+vol. 13, no. 1, pp. 33--52, Mar. 2022, 
+doi: 10.22667/JOWUA.2022.03.31.0033.
 \bibitem{proxmox} Proxmox VE. Available: \url{https://www.proxmox.com/}
+\bibitem{kypo2020} J. Vykopal, P. Čeleda, P. Seda, V. Švábenský, and D. Tovarňák,
+``Scalable Learning Environments for Teaching Cybersecurity Hands-on,''
+in \textit{2020 IEEE Frontiers in Education Conference (FIE)},
+Uppsala, Sweden, 2020, pp. 1--9, doi: 10.1109/FIE44824.2020.9274085.
+\bibitem{simspace} SimSpace, “Tailored Cyber Range Solutions / Attack Catalog / Training Catalog,”  Available: \url{https://simspace.com/platform/}  
+\bibitem{immersive} Immersive Labs, “Immersive One: continuous cyber resilience, cyber drills, labs \& exercises,” Immersive Labs product overview, 2025. Available: \url{https://www.immersivelabs.com/products/platform}  
+\bibitem{rangeforce} RangeForce, “Cloud-Based Cyber Range Platform / Attack Scenario Catalog,” Available: \url{https://www.rangeforce.com/}
+\bibitem{cyberbit} Cyberbit, “Cyber Range Platform / ActiveExperiences \& Live-Fire Scenarios,” Available: \url{https://www.cyberbit.com/}
 \bibitem{ansible} Ansible Documentation. Available: \url{https://docs.ansible.com/}
 \bibitem{tailscale} Tailscale Documentation. Available: \url{https://tailscale.com/kb/}
 \bibitem{docker} Docker Documentation. Available: \url{https://docs.docker.com/}
