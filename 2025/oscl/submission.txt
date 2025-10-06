@@ -1,0 +1,19 @@
+Speaker(s): Steve Clement
+Proposal title: Range 42 status update
+Session type: Short talk (20minutes)
+Abstract: Range42 is an open cyber range platform developed by the National Cybersecurity Competence Center (NC3) under the Luxembourg House of Cybersecurity with the help of DIGISQUAD. It automates the deployment of training environments for cybersecurity education and research, with current capabilities including automated provisioning on Proxmox, integrated monitoring, VPN connectivity, and an initial inventory of vulnerable and misconfigured environments. A visual designer for lab infrastructures is in development, alongside plans for expanded scenario coverage and multi-subnet support. This talk will provide a project status update and invite the open source community to contribute to scenario design, infrastructure automation, and user-facing tools.
+Description: Cyber ranges are critical for hands-on training, research, and capability testing, yet many existing solutions are closed or difficult to access. Range42, developed by NC3 and DIGISQUAD at the Luxembourg House of Cybersecurity, is designed to change that by providing an open, flexible platform for deploying realistic cybersecurity environments.
+
+The platform already supports automated deployment of Linux-based lab environments on Proxmox, complete with firewalling, VPN access, and monitoring. An inventory of around 100 real-world CVEs and misconfigurations has been identified, with ~20 already deployable for training exercises. While the current focus is on vulnerability-based labs, the architecture can support malware analysis and forensic investigation scenarios in the future.
+
+Looking forward, three major development tracks are underway:
+
+1. Expanding the vulnerability and misconfiguration inventory to broaden coverage.
+2. Advancing a web-based lab designer from proof of concept into a functional, instructor-friendly tool.
+3. Supporting multi-subnet infrastructures to simulate more complex environments.
+
+This session will share progress, lessons learned, and upcoming milestones, while also serving as a call for collaboration. We are inviting open source contributors to help extend the platform — whether through infrastructure automation, UI/UX design, or crafting realistic cybersecurity scenarios. Join us to shape the future of open cyber ranges with Range42.
+
+Notes: Here is a program blurb if needed:
+
+Range42, developed by the National Cybersecurity Competence Center (NC3) and DIGISQUAD under the Luxembourg House of Cybersecurity, is an open cyber range platform for realistic cybersecurity training and research. The project has reached key milestones in automated lab deployment, monitoring, and scenario design, with a roadmap toward broader vulnerability coverage and user-friendly lab design tools. This session will present the latest progress and invite open source contributors to join in shaping the platform’s future.
