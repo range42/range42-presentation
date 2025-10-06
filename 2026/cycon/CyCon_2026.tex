@@ -33,40 +33,39 @@
 \maketitle
 
 \begin{abstract}
-The future of cyber conflict demands training platforms that anticipate tomorrow's threats rather than replicate yesterday's incidents. This paper presents Range42~\cite{range42}, an open cyber range developed by the National Cybersecurity Competence Center (NC3~\cite{NC3}) under the Luxembourg House of Cybersecurity~\cite{LHC} together with DIGISQUAD~\cite{DIGISQUAD}. Range42 lowers barriers to building realistic, reproducible training environments through automation and community collaboration.
+Cybersecurity training infrastructures struggle to keep pace with rapidly evolving threat landscapes, creating a critical skills gap that undermines organizational and national security postures. Traditional cyber ranges compound this problem through vendor lock-in, closed scenario repositories, and manual deployment processes that prevent scalable, collaborative defense preparation. This paper presents Range42~\cite{range42}, an open cyber range platform developed by the NC3~\cite{NC3} (National Cybersecurity Competence Center) under the LHC~\cite{LHC} (Luxembourg House of Cybersecurity) together with DIGISQUAD~\cite{DIGISQUAD}, designed to democratize access to realistic, reproducible training environments through automation and community collaboration.
 
-Our research introduces two core contributions and a future standard. First, we describe an extensible catalog system of vulnerable and misconfigured environments. With over 100 curated CVEs and misconfigurations identified and approximately 20 already deployable, this system enables structured reproduction of real-world attack surfaces for controlled experiments. Second, we detail an orchestration framework capable of deploying multi-subnet infrastructures, making it possible to simulate complex enterprise-grade networks with isolation and fidelity. Finally we want to develop a scenario standard language for cyber ranges, well knowing that quite a few efforts already exist yet none englobes the entire process of a cyber range exercise. Bearing this in mind we will develop a baseline on the Common EXercise Format~\cite{cexf}, inspect the Open Cyber Range SDL~\cite{SDL} (Scenario Defined Language) and consider the findings of the Automating the Generation of Cyber Range Virtual Scenarios with VSDL~\cite{vsdl2022} We highlight a proof-of-concept LLM-assisted workflow: prompt → scenario narrative + schema → validation → ingestion; this enables fast, potentially innovative and always up to date on the current threat landscape and the most common attacks.
+This paper introduces three core contributions addressing fundamental limitations in current cyber range architectures. First, an extensible catalog of over 100 curated CVEs and misconfigurations (20 currently deployable) enabling structured reproduction of real-world attack surfaces for controlled experiments. Second, an orchestration framework deploying multi-subnet enterprise-grade networks with isolation and fidelity, eliminating manual configuration barriers. Third, a dual-layer scenario description standard (human-readable narrative + machine-ingestible JSON schema) supporting both manual authoring and LLM-assisted generation. Building on existing standards including MISP's Common EXercise Format~\cite{cexf}, Open Cyber Range SDL~\cite{SDL} (Scenario Description Language), and Automating the Generation of Cyber Range Virtual Scenarios with VSDL~\cite{vsdl2022}, development of a proof-of-concept workflow: 
 
-We propose \textbf{range42-catalog}, a modular, open catalog of vulnerable and misconfigured environments, designed for extensibility, interoperability, and community-driven growth. The catalog aligns with our Ansible-based architecture and supports declarative scenario assembly across tools.
+prompt $\rightarrow$ validated scenario $\rightarrow$ automated deployment, enabling rapid adaptation to emerging threats.
 
-We also present a \textbf{scenario description standard} (dual human-readable + machine-ingestible schema) for defining cyber range scenarios (including technical and non-technical injects), enabling a single definition to generate JSON for deployment. We highlight a proof-of-concept LLM-assisted workflow: prompt → scenario narrative + schema → validation → ingestion.
 
-We outline the automation pipeline (Proxmox~\cite{proxmox} integration, Ansible~\cite{ansible}-driven orchestration, container/VM deployment, Tailscale-based~\cite{tailscale} zero-trust connectivity), and evaluate catalog ingestion, scenario generation, and deployment consistency. We conclude that an open, standardized catalog + scenario architecture is key to “securing tomorrow” through shared scenario ecosystems, faster tool integration, and collaborative innovation.
+The platform's backend achieves full operational capability in ``shooting range'' mode with Proxmox~\cite{proxmox}, Ansible~\cite{ansible}, and Tailscale-based~\cite{tailscale} connectivity, while graphical interfaces remain under development. By establishing open, standardized catalog architectures, Range42 enables shared scenario ecosystems that accelerate collective defense capabilities across organizations and nations. This approach addresses the urgent need for scalable, interoperable training infrastructures that can anticipate tomorrow's threats rather than merely replicate yesterday's incidents.
 \end{abstract}
 
 \section{Introduction}
 Cyber threats evolve faster than training and evaluation methodologies. To \emph{secure tomorrow}, cyber ranges must enable realistic, reproducible, and rapidly composed environments that reflect emerging attack surfaces and defensive strategies. Traditional cyber ranges face three critical limitations: proprietary platforms create vendor lock-in, closed scenario repositories prevent collaborative development, and manual deployment processes hinder scalability. Range42 addresses these challenges through open architecture, community-driven content catalogs, and infrastructure-as-code automation.
 
-We present \textbf{Range42}, an open cyber range platform emphasizing automation, flexibility, and collaboration. Our contributions are: (1) an extensible catalog of vulnerable and misconfigured systems for research-grade reproducibility; (2) an orchestration framework for deploying multi-subnet infrastructures approximating enterprise topologies; and (3) a standardized scenario description framework that blends human readability and machine ingestion, enabling consistent narrative and technical deployment definitions. We outline our automation pipeline and report lessons for scalability, isolation, and openness.
+\textbf{Range42} is an open cyber range platform emphasizing automation, flexibility, and collaboration. Our contributions are: (1) an extensible catalog of vulnerable and misconfigured systems for research-grade reproducibility; (2) an orchestration framework for deploying multi-subnet infrastructures approximating enterprise topologies; and (3) a standardized scenario description framework that blends human readability and machine ingestion, enabling consistent narrative and technical deployment definitions. The project outlines the automation pipeline and report lessons for scalability, isolation, and openness.
 
-We also explore an experimental LLM-assisted pipeline to generate scenarios from prompts, enabling rapid scenario creation that remains current with the evolving threat landscape. Playing hundreds of generated scenarios to extract telemetry might provide valuable datasets for security analytics research, especially when paired with real-world incident data and digital twins of documented breaches.
+Exploring an experimental LLM-assisted pipeline to generate scenarios from prompts, enabling rapid scenario creation that remains current with the evolving threat landscape. Playing hundreds of generated scenarios to extract telemetry might provide valuable datasets for security analytics research, especially when paired with real-world incident data and digital twins of documented breaches.
 
 \section{Related Work}
 
 \textbf{Cyber range platforms.}
 Several academic and commercial cyber ranges address cybersecurity training needs but face limitations in openness and interoperability.
-KYPO Cyber Range~\cite{kypo2020} demonstrates scalable approaches using OpenStack and sandbox orchestration for hands-on cybersecurity education, achieving impressive deployment efficiency through containerization and automation. However, KYPO relies on platform-specific tooling for scenario management and lacks standardized interfaces for cross-platform scenario exchange.
+KYPO Cyber Range~\cite{kypo2021} demonstrates scalable approaches using OpenStack and sandbox orchestration for hands-on cybersecurity education, achieving impressive deployment efficiency through containerization and automation. However, KYPO relies on platform-specific tooling for scenario management and lacks standardized interfaces for cross-platform scenario exchange.
 Commercial platforms like SimSpace~\cite{simspace}, Immersive Labs~\cite{immersive}, RangeForce~\cite{rangeforce}, and Cyberbit~\cite{cyberbit} offer rich features including realistic enterprise environments and automated assessment, but impose vendor lock-in, lack transparent architectures, and prevent community contribution to scenario catalogs.
 Open-source efforts exist but often remain tightly coupled to specific infrastructure choices, limiting portability and collaborative development.
 
 \textbf{Scenario description languages.}
 The Open Cyber Range SDL provides a YAML-based specification for defining training scenarios with infrastructure components, network topologies, and service configurations. While SDL enables declarative scenario definitions, it focuses primarily on technical infrastructure without integrated narrative layers, learning objective frameworks, or mechanisms for LLM-assisted generation.
-MISP's Common Exercise Format (CEXF) enables exercise information sharing across organizations through structured metadata, event timelines, and inject specifications. CEXF excels at exercise documentation and inter-organizational coordination but does not include deployment automation, orchestration primitives, or runtime scenario execution capabilities.
+MISP's Common EXercise Format (CEXF) enables exercise information sharing across organizations through structured metadata, event timelines, and inject specifications. CEXF excels at exercise documentation and inter-organizational coordination but does not include deployment automation, orchestration primitives, or runtime scenario execution capabilities.
 Other domain-specific languages exist for specific platforms but lack standardization efforts enabling cross-platform compatibility.
 Range42 builds on these efforts by combining human-readable narratives with machine-executable schemas in a unified framework, supporting both manual authoring and automated generation while maintaining deployment platform flexibility.
 
 \textbf{Automation and orchestration.}
-Infrastructure-as-Code (IaC) approaches using Ansible, Terraform, and Kubernetes have been successfully applied to cyber range deployment~\cite{kypo2020}, enabling reproducible infrastructure provisioning and configuration management.
+Infrastructure-as-Code (IaC) approaches using Ansible, Terraform, and Kubernetes have been successfully applied to cyber range deployment~\cite{kypo2021}, enabling reproducible infrastructure provisioning and configuration management.
 However, existing solutions often couple scenarios tightly to specific platforms, making cross-platform scenario portability difficult.
 Containerization technologies like Docker~\cite{docker} provide lightweight virtualization for rapid deployment but require careful orchestration for complex multi-subnet scenarios.
 Range42's catalog-driven architecture with extension APIs enables platform-agnostic scenario definitions while maintaining deployment flexibility through abstraction layers that map high-level scenario specifications to platform-specific orchestration logic.
@@ -85,7 +84,7 @@ Range42 adopts similar principles, aiming to build a federated ecosystem of cybe
 
 \section{System Architecture \& Catalog Design}
 Range42 operates via Proxmox, Ansible, and container/VM integration.  
-The \textbf{range42-catalog} is structured as a modular repository of scenario components (e.g. vulnerable hosts, network topologies, inject modules), each described with metadata (e.g. prerequisites, dependencies, scoring hooks). We maintain extension APIs so external tools can list, validate, augment, or contribute entries. The catalog integrates seamlessly with Ansible roles to map component definitions to deployment logic.
+The \textbf{range42-catalog} is structured as a modular repository of scenario components (e.g. vulnerable hosts, network topologies, inject modules), each described with metadata (e.g. prerequisites, dependencies, scoring hooks). The project maintains extension APIs so external tools can list, validate, augment, or contribute entries. The catalog integrates seamlessly with Ansible roles to map component definitions to deployment logic.
 
 \begin{figure}[h]
 \centering
@@ -95,31 +94,30 @@ The \textbf{range42-catalog} is structured as a modular repository of scenario c
 \end{figure}
 
 \section{Vulnerability and Misconfiguration Catalog}
-We curate an catalog of $\sim$100 CVEs/misconfigurations (with $\sim$20 currently deployable), using build descriptors and snapshotting to balance reproducibility with support for proprietary or atypical systems. The design supports traceability, variant creation, and controlled risk exposure during exercises.
+Curated catalog of $\sim$100 CVEs/misconfigurations (with $\sim$20 currently deployable), using build descriptors and snapshotting to balance reproducibility with support for proprietary or atypical systems. The design supports traceability, variant creation, and controlled risk exposure during exercises.
 
 \section{Scenario Description Standard}
 
-\textbf{Dual-layer standard.} We standardize scenarios with a dual representation:
+Standardized scenarios with a dual representation:
 (i) a \emph{human-readable} layer (narrative, learning objectives, context, and both technical and non-technical injects); and
 (ii) a \emph{machine-ingestible} schema (JSON) that encodes actors, assets, networks, triggers, dependencies, and scoring.
 A bidirectional mapping preserves consistency between the narrative and the structured specification.
 
-\textbf{Lifecycle and validation.} Authors draft the human-readable scenario, which is compiled into the machine schema.
+For validation a human-readable scenario is drafted and compiled into the machine schema.
 Automated validators check syntax, dependency closure, resource bounds, and security constraints prior to ingestion.
 Rejected builds include actionable diagnostics; accepted builds become catalog entries with semantic versioning.
 
-\textbf{LLM assistance.} The standard is designed to leverage LLMs to propose both the human narrative and the machine schema from a prompt (e.g., ``simulate a ransomware intrusion across three subnets'').
+The standard is designed to leverage LLMs to propose both the human narrative and the machine schema from a prompt (e.g., ``simulate a ransomware intrusion across three subnets'').
 Outputs are \emph{never} trusted blindly: they pass through the same validation pipeline and require human approval before catalog admission and deployment.
-We define a domain-specific schema (YAML / JSON hybrid) for scenario narratives. A scenario file includes sections like: background story, objectives, inject schedule, scoring rules, triggers, technical blueprint. From this human-readable form, we generate canonical machine-readable JSON which Range42 ingests to deploy and run the scenario. We include validation logic to catch schema errors or dependency mismatches.
+Definition of a domain-specific schema (YAML / JSON hybrid tbd.) for scenario narratives. A scenario file includes sections like: background story, objectives, inject schedule, scoring rules, triggers, technical blueprint. From this human-readable form, generates canonical machine-readable JSON which Range42 ingests to deploy and run the scenario. To be included is a validation logic to catch schema errors or dependency mismatches.
 
 \section{Integration \& Deployment Pipeline}
-From catalog + scenario schema to live lab: we describe the orchestration path (Ansible playbooks, Proxmox API calls, network wiring, Tailscale connectivity). We discuss how catalog metadata guides resource allocation, dependency resolution, and runtime coordination of injects and events.
+From catalog + scenario schema to live lab: description of the orchestration path (Ansible playbooks, Proxmox API calls, network wiring, Tailscale connectivity). Discussions on how catalog metadata guides resource allocation, dependency resolution, and runtime coordination of injects and events.
 
 \section{LLM-Assisted Scenario Generation}
-We built a proof-of-concept workflow: given a prompt (e.g. “simulate a ransomware attack in 3-subnet corporate network”), an LLM produces a draft narrative + schema. We feed that into validation logic, correct or flag inconsistencies, then ingest it into the catalog for deployment. Preliminary results and failure modes are discussed.
+Provided a proof-of-concept workflow: given a prompt (e.g., ``simulate a ransomware attack in 3-subnet corporate network''), an LLM produces a draft narrative + schema. This will feed into the validation logic, correct or flag inconsistencies, then ingest it into the catalog for deployment. Preliminary results and failure modes are discussed.
 
 \section{Evaluation}
-
 
 \textbf{Current deployment status.} 
 Range42 has achieved full operational capability in ``shooting range'' mode, where the complete backend infrastructure is production-ready and actively deployed.
@@ -144,18 +142,18 @@ the backend orchestration, deployment, and monitoring pipelines are fully implem
 whereas user-facing interfaces for non-technical operators are planned enhancements.
 
 \textbf{Metrics.} 
-We report (i) ingestion success rate (schema validation pass/fail), 
+Report (i) ingestion success rate (schema validation pass/fail), 
 (ii) deployment latency for typical lab topologies (VM- and container-based), 
 and (iii) reproducibility across repeated runs.
 Where infrastructure constraints limit scale tests, 
-we complement with instructor/operator feedback and failure-mode analyses 
+complement with instructor/operator feedback and failure-mode analyses 
 (e.g., image sprawl, secret handling, routing edge cases).
-We measure catalog ingestion success rate, 
+Measure catalog ingestion success rate, 
 scenario consistency (i.e. narrative vs deployed topology), 
 deployment latency, 
 and reusability across runs. 
 Where full metrics are limited, 
-we include qualitative feedback from instructors and early users.
+include qualitative feedback from instructors and early users.
 
 \begin{table}[h]
 \centering
@@ -189,39 +187,44 @@ Catalog Initialization & 25\% \\
 
 \section{Discussion}
 
-\textbf{Governance and federation.} A community catalog requires contribution guidelines, schema versioning strategy, and automated QA (linting, policy checks).
-We envision cross-institution \emph{catalog federation} where trusted peers exchange signed scenario components, enabling shared curricula and comparable experiments.
+\textbf{Governance and federation:} A community catalog requires contribution guidelines, schema versioning strategy, and automated QA (linting, policy checks).
+Ideal vision is cross-institution \emph{catalog federation} where trusted peers exchange signed scenario components, enabling shared curricula and comparable experiments. (Exchange protocol needs to be decided.)
 
-\textbf{Standardization impact.} A widely adopted scenario standard lowers authoring friction, enables portable exercises, and allows third-party tools (including LLM-driven assistants) to integrate safely.
+\textbf{Standardization impact:} A widely adopted scenario standard lowers authoring friction, enables portable exercises, and allows third-party tools (including LLM-driven assistants) to integrate safely.
 
-\textbf{Synergies with NGSOTI.} 
-We identify strong architectural and conceptual overlap with the \emph{Next Generation Security Operator Training Infrastructure (NGSOTI)} project~\cite{ngsoti}, 
+\textbf{Synergies with NGSOTI:} The authors identified strong architectural and conceptual overlap with the \emph{Next Generation Security Operator Training Infrastructure (NGSOTI)} project~\cite{ngsoti}, 
 which focuses on modular, open architectures for distributed cyber range operations. 
 Range42 aims to cooperate with NGSOTI and re-use compatible components where feasible --- particularly around orchestration pipelines, scenario interoperability, and federated data exchange. 
 This alignment ensures that both projects contribute toward a shared European ecosystem of interoperable, open, and extensible cyber training infrastructures.
 
-We reflect on expressivity vs. enforceable constraints, schema versioning, contribution governance, catalog federation across platforms, and operational challenges (e.g. schema drift, extension conflicts).
+Reflections on expressivity vs. enforceable constraints, schema versioning, contribution governance, catalog federation across platforms, and operational challenges (e.g. schema drift, extension conflicts).
 
 \section{Future Work}
 
-\textbf{Catalog.}
-Expand the catalog with richer scenarios (forensics, social engineering, insider threats), build GUI editors for the standard format, integrate stronger LLM-based validation and correction, and establish federated catalogs across multiple range platforms with shared schemas. Advancing a visual lab designer; integrating malware analysis/forensics workflows; and supporting richer hybrid topologies.
+\textbf{Catalog:} Expand the catalog with richer scenarios (forensics, social engineering, insider threats), build GUI editors for the standard format, integrate stronger LLM-based validation and correction, and establish federated catalogs across multiple range platforms with shared schemas. Advancing a visual lab designer; integrating malware analysis/forensics workflows; and supporting richer hybrid topologies.
 
-\textbf{Visual lab designer.}
-While Range42's backend orchestration is fully operational in shooting range mode with command-line and API interfaces,
+\textbf{Visual lab designer:} While Range42's backend orchestration is fully operational in shooting range mode with command-line and API interfaces,
 the platform requires graphical tools to serve non-technical instructors and students.
 The visual lab designer will provide drag-and-drop topology composition, allowing users to construct multi-subnet networks, place vulnerable hosts, configure network segmentation, and define inject schedules through an intuitive interface.
 This component is currently under active development as the Exercise Management Platform (EMP) with mockups completed and frontend implementation in progress.
 
-\textbf{Exercise management interface.}
-The EMP will extend beyond scenario authoring to provide real-time exercise orchestration, participant monitoring, and automated scoring.
+\textbf{Exercise management interface:} The EMP will extend beyond scenario authoring to provide real-time exercise orchestration, participant monitoring, and automated scoring.
 Instructors will track student progress, trigger dynamic injects, adjust scenario difficulty, and analyze performance metrics through unified dashboards.
 Integration with the scenario description standard will enable seamless transitions from design to deployment to assessment.
 
-
 \section{Conclusion}
-By combining an open catalog architecture with a standardized, dual-mode scenario description and LLM-assisted generation, Range42 is positioned not just as a cyber range but as part of an \textbf{ecosystem of interoperable scenario tooling}. In this context we try to follow the lead of the MISP~\cite{misp} project when it comes to community building, information sharing, open source ethos and innovation by having open standards.
-We believe this approach will help catalyze collaborative, scalable, and future-ready cyber range research and training.
+
+By combining an open catalog architecture with a standardized, dual-mode scenario description and LLM-assisted generation, Range42 demonstrates that next-generation cyber ranges must function as ecosystems rather than isolated platforms. Following MISP's~\cite{misp} successful model of community building, open standards, and collaborative innovation, Range42 establishes technical and organizational foundations for federated cyber training infrastructure.
+
+The platform's three core contributions---extensible vulnerability catalogs, automated multi-subnet orchestration, and dual-layer scenario standards---address fundamental barriers that have prevented cyber range democratization: vendor lock-in, manual deployment overhead, and closed scenario repositories. With backend automation fully operational in shooting range mode and graphical interfaces under development, Range42 proves that research-grade reproducibility and operational accessibility need not be mutually exclusive.
+
+The urgent cybersecurity skills gap demands training infrastructures that scale through collaboration rather than replication. Range42's open architecture enables organizations to contribute scenarios, share attack surface definitions, and collectively maintain current threat representations without rebuilding infrastructure from scratch. As cyber threats evolve daily, training platforms must anticipate emerging attack patterns through rapid scenario generation and community-driven content evolution.
+
+Future cyber defense readiness depends on interoperable training ecosystems where scenarios, telemetry formats, and assessment frameworks cross organizational boundaries. Range42 provides both working implementation and open standards to catalyze this transition. The platform's LLM-assisted scenario generation and automated telemetry collection further enable research at scales previously impossible, generating datasets for advancing detection algorithms and defensive technologies.
+
+Organizations seeking realistic, reproducible cyber training environments can deploy Range42 today, while researchers gain a platform for studying training effectiveness and scenario optimization at scale. By securing tomorrow's defenders through collaborative, automated, and continuously evolving training infrastructures, Range42 addresses not just technical challenges but the strategic imperative of collective defense capability development.
+
+The authors believe this approach will help catalyze collaborative, scalable, and future-ready cyber range research and training.
 Automated ranges like Range42 help \emph{secure tomorrow} by enabling hands-on research and training humans as well as generating data for model generation at scale.
 
 \bibliographystyle{IEEEtran}
@@ -230,7 +233,7 @@ Automated ranges like Range42 help \emph{secure tomorrow} by enabling hands-on r
 \bibitem{NC3} National Cybersecurity Competence Center Luxembourg: \url{https://www.nc3.lu/}
 \bibitem{LHC} Luxembourg House of Cybersecurity: \url{https://www.lhc.lu/}
 \bibitem{DIGISQUAD} DIGISQUAD: \url{https://www.digisquad.com/}
-\bibitem{cexf} MISP Common Exercise Format: \url{https://github.com/MISP/cexf}
+\bibitem{cexf} MISP Common EXercise Format: \url{https://github.com/MISP/cexf}
 \bibitem{SDL} Open Cyber Range SDL: \url{https://documentation.opencyberrange.ee/docs/sdl/reference/}
 \bibitem{vsdl2022} G. Costa, E. Russo, and A. Armando, 
 ``Automating the Generation of Cyber Range Virtual Scenarios with VSDL,'' 
@@ -238,19 +241,19 @@ Automated ranges like Range42 help \emph{secure tomorrow} by enabling hands-on r
 vol. 13, no. 1, pp. 33--52, Mar. 2022, 
 doi: 10.22667/JOWUA.2022.03.31.0033.
 \bibitem{proxmox} Proxmox VE. Available: \url{https://www.proxmox.com/}
-\bibitem{kypo2020} J. Vykopal, P. Čeleda, P. Seda, V. Švábenský, and D. Tovarňák,
-``Scalable Learning Environments for Teaching Cybersecurity Hands-on,''
-in \textit{2020 IEEE Frontiers in Education Conference (FIE)},
-Uppsala, Sweden, 2020, pp. 1--9, doi: 10.1109/FIE44824.2020.9274085.
-\bibitem{simspace} SimSpace, “Tailored Cyber Range Solutions / Attack Catalog / Training Catalog,”  Available: \url{https://simspace.com/platform/}  
-\bibitem{immersive} Immersive Labs, “Immersive One: continuous cyber resilience, cyber drills, labs \& exercises,” Immersive Labs product overview, 2025. Available: \url{https://www.immersivelabs.com/products/platform}  
-\bibitem{rangeforce} RangeForce, “Cloud-Based Cyber Range Platform / Attack Scenario Catalog,” Available: \url{https://www.rangeforce.com/}
-\bibitem{cyberbit} Cyberbit, “Cyber Range Platform / ActiveExperiences \& Live-Fire Scenarios,” Available: \url{https://www.cyberbit.com/}
 \bibitem{ansible} Ansible Documentation. Available: \url{https://docs.ansible.com/}
 \bibitem{tailscale} Tailscale Documentation. Available: \url{https://tailscale.com/kb/}
+\bibitem{kypo2021} J. Vykopal, P. \v{C}eleda, P. Seda, V. \v{S}v\'{a}bensk\'{y}, and D. Tovar\v{n}\'{a}k,
+``Scalable Learning Environments for Teaching Cybersecurity Hands-on,''
+in \textit{2021 IEEE Frontiers in Education Conference (FIE)},
+Lincoln, NE, USA, 2021, pp. 1--9, doi: 10.1109/FIE49875.2021.9637180.
+\bibitem{simspace} SimSpace, ``Tailored Cyber Range Solutions,'' 2025. [Online]. Available: \url{https://simspace.com/platform/}
+\bibitem{immersive} Immersive Labs, ``Immersive One Platform,'' 2025. [Online]. Available: \url{https://www.immersivelabs.com/products/platform}
+\bibitem{rangeforce} RangeForce, ``Cloud-Based Cyber Range Platform,'' 2025. [Online]. Available: \url{https://www.rangeforce.com/}
+\bibitem{cyberbit} Cyberbit, ``Cyber Range Platform,'' 2025. [Online]. Available: \url{https://www.cyberbit.com/}
 \bibitem{docker} Docker Documentation. Available: \url{https://docs.docker.com/}
-\bibitem{misp} MISP Project, ``MISP Threat Intelligence Sharing Platform,'' 2024. [Online]. Available: \url{https://www.misp-project.org/}
 \bibitem{ngsoti} D4 Project, ``NGSOTI Architecture Overview: Next Generation Security Operator Training Infrastructure,'' 2025. [Online]. Available: \url{https://d4-project.org/2025/06/19/NGSOTI-Architecture-Overview.html}
+\bibitem{misp} MISP Project, ``MISP Threat Intelligence Sharing Platform,'' 2024. [Online]. Available: \url{https://www.misp-project.org/}
 \end{thebibliography}
 
 
