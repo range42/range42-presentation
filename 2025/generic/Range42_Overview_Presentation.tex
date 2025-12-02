@@ -1,0 +1,113 @@
+% !TEX TS-program = xelatex
+\documentclass[aspectratio=169]{beamer}
+\usetheme[numbering=fraction,progressbar=head]{metropolis}
+\setbeamersize{text margin left=8mm,text margin right=8mm}
+
+% --- CUSTOM FOOTER WITH TLP MARKING ---
+\setbeamertemplate{frame footer}{\textbf{TLP:CLEAR} – Information may be shared freely without restriction.}
+\setbeamercolor{frame footer}{fg=cyber-accent}
+
+% --- FONTS (XeLaTeX) ---
+\usepackage{fontspec}
+\setsansfont[
+  Ligatures=TeX, Scale=1.02,
+  BoldFont = {IBM Plex Sans Bold},
+  ItalicFont = {IBM Plex Sans Italic}
+]{IBM Plex Sans}
+\setmonofont{IBM Plex Mono}
+
+% --- ICONS ---
+\usepackage{fontawesome5}
+
+% --- COLORS (cyber palette) ---
+\definecolor{cyber-bg}{HTML}{0B0F14}
+\definecolor{cyber-ink}{HTML}{E6EEF5}
+\definecolor{cyber-accent}{HTML}{217EAA}
+\definecolor{cyber-mid}{HTML}{7D9CB7}
+\definecolor{cyber-soft}{HTML}{8CA4AC}
+\setbeamercolor{normal text}{fg=cyber-ink,bg=cyber-bg}
+\setbeamercolor{frametitle}{fg=cyber-ink,bg=cyber-bg}
+\setbeamercolor{progress bar}{fg=cyber-accent,bg=cyber-soft}
+\setbeamercolor{alerted text}{fg=cyber-accent}
+
+% --- LINKS ---
+\hypersetup{colorlinks=true, linkcolor=cyber-accent, urlcolor=cyber-accent}
+
+\title{Range\#42:\\Building Europe’s Open Cyber Range}
+\author{NC3 Luxembourg \& DIGISQUAD}
+\institute{NCC-LU project}
+\date{2025}
+
+\begin{document}
+
+%--------------------------------------------------
+\begin{frame}
+  \titlepage
+\end{frame}
+%--------------------------------------------------
+
+\begin{frame}{Range\#42: Building Europe’s Open Cyber Range}
+\textbf{Mission:}\\[4pt]
+Develop an open-source, modular, and automated cyber-range platform that enables hands-on cyber-defence training, simulation, and experimentation — fully deployable within national or EU infrastructures.\\[8pt]
+
+\textbf{Strategic relevance:}
+\begin{itemize}
+  \item Reinforces European cyber resilience and digital sovereignty.
+  \item Aligned with NIS2, Cyber Solidarity Act, and Digital Europe Programme priorities.
+  \item Bridges research, education, and operational defence across member states.
+\end{itemize}
+
+\textbf{Partners:}
+\begin{itemize}
+  \item \textbf{NC3 Luxembourg} – coordination and standardisation leadership.
+  \item \textbf{DIGISQUAD} – core platform engineering and automation.
+  \item Co-funded under \textbf{NCC-LU-S (101127115)}.
+\end{itemize}
+\end{frame}
+%--------------------------------------------------
+
+\begin{frame}{Achievements in 2025}
+\textbf{Technical \& organisational progress:}
+\begin{itemize}
+  \item End-to-end deployment automation via \textbf{Ansible + Proxmox}.
+  \item Secure zero-trust networking through \textbf{Tailscale / WireGuard}.
+  \item Integrated observability with \textbf{Wazuh} SIEM.
+  \item Early \textbf{visual lab-designer prototype} to democratise scenario creation.
+\end{itemize}
+
+\textbf{Knowledge \& innovation contributions:}
+\begin{itemize}
+  \item 100+ vulnerabilities and misconfigurations documented (20 deployable).
+  \item Stable architecture validated on Linux-based clusters.
+  \item \textbf{Research dissemination:} CyCon 2026 paper on \textit{AI automation for metric gathering, community building, standardisation, and open-source ethics.}
+\end{itemize}
+
+\textbf{AI focus:}
+\begin{itemize}
+  \item AI for scenario classification, telemetry correlation, and exercise-metrics automation.
+  \item Foundation for AI-assisted red/blue teaming and autonomous range orchestration.
+\end{itemize}
+\end{frame}
+%--------------------------------------------------
+
+\begin{frame}{The Road Ahead (2026–2027)}
+\textbf{Next priorities:}
+\begin{itemize}
+  \item Broaden scenario library: ICS/OT, AI-driven threat emulation, cross-border exercises.
+  \item Finalise user interfaces for orchestration and training management.
+  \item Support multi-network, distributed deployments for EU-wide cooperation.
+\end{itemize}
+
+\textbf{Strategic development path:}
+\begin{itemize}
+  \item Embed AI modules for adaptive difficulty and real-time exercise evaluation.
+  \item Formalise engagement with the ECCC / NCC ecosystem for interoperability.
+  \item Establish a European open repository for cyber-training standards and assets.
+\end{itemize}
+
+\textbf{Call to action:}\\[4pt]
+\textit{Support Range 42 to anchor Europe’s sovereign, intelligent, and interoperable cyber-training ecosystem.}
+\end{frame}
+%--------------------------------------------------
+
+\end{document}
