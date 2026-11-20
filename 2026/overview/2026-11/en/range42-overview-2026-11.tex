@@ -121,7 +121,7 @@
   }%
   \vskip.25em
   \nointerlineskip
-  \insertnote
+  {\footnotesize\insertnote\par}
 }
 \makeatother
 
@@ -223,10 +223,10 @@
   \end{tikzpicture}
   \note[item]{Key message: Range42 is a set of blocks. Each block has one role and evolves on its own.}
   \note[item]{Interfaces: Deployer UI (visual lab design) and Deployer CLI (\texttt{range42-context}, daily operations). One deployer, several Proxmox clusters.}
-  \note[item]{API: gateway (authentication, ACL), REST API (OpenAPI), job runner (ansible-runner), live status (WebSocket).}
+  \note[item]{API: gateway (authentication, access control lists (ACL)), REST API (OpenAPI), job runner (ansible-runner), live status (WebSocket).}
   \note[item]{Playbooks: Ansible does the work; secrets in Ansible Vault. A scenario is a set of bundles: VM/container, firewall, admin service, CTF challenge.}
   \note[item]{Bundles are reusable (e.g.\ Wazuh), built from the catalog: Ansible roles, Docker Compose stacks, gamification.}
-  \note[item]{Proxmox VE hosts the VMs, LXC containers and SDN networks, created via its API.}
+  \note[item]{Proxmox VE hosts the VMs, LXC (Linux Containers) containers and SDN (software-defined networking) networks, created via its API.}
   \note[item]{Everything is code, versioned in Git: any lab is rebuilt identically from any commit; changes are reviewed.}
 \end{frame}
 
@@ -244,29 +244,22 @@
     \runitem{\faBug}{Offensive \& CTF}{Vulnerable and misconfigured services, themed web fronts} \\
   \end{tabular}
   \note[item]{Key message: ready-to-deploy labs, all built from the reusable bundles of the previous slide.}
-  \note[item]{Infrastructure: any number of SDN subnets, isolated on demand (NAT toggle, Proxmox firewall). Linux hosts (Debian, Ubuntu, Alpine). Windows AD (DC + client).}
+  \note[item]{Infrastructure: any number of SDN subnets, isolated on demand (NAT (network address translation) toggle, Proxmox firewall). Linux hosts (Debian, Ubuntu, Alpine). Windows Active Directory (AD): domain controller and client.}
   \note[item]{Product labs: any tool packaged as a bundle (Docker Compose or VM), for admin training or as targets. Today: MISP, Gitea, Mattermost, Nextcloud, Rocket.Chat.}
-  \note[item]{Detection: any SIEM or monitoring tool packaged as a bundle. Today: Wazuh server and agents.}
+  \note[item]{Detection: any SIEM (security information and event management) or monitoring tool packaged as a bundle. Today: Wazuh server and agents.}
   \note[item]{CTF: vulnerable services (known CVEs) and misconfigured services, each a reusable bundle. Themed web fronts (e.g.\ a fake hospital or bank) make the challenge realistic.}
 \end{frame}
 
 % === SEE IT ===
-% Screenshot from images/screenshots/ if it exists, else a placeholder box. #1 = file name, #2 = caption.
-\newcommand{\shot}[2]{%
-  \IfFileExists{../../../images/screenshots/#1}%
-    {\includegraphics[width=\linewidth,height=0.55\textheight,keepaspectratio]{../../../images/screenshots/#1}}%
-    {{\color{cyber-soft}\fbox{\parbox[c][0.5\textheight][c]{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{\centering\Large\faImage\\[0.4em]\footnotesize\texttt{#1}}}}}%
-  \par\smallskip{\small\textbf{#2}}}
-
 \begin{frame}{See it: Deployer UI}
-  \centering
-  \begin{columns}[T]
-    \column{0.48\textwidth}
+  \begin{columns}[c]
+    \column{0.69\textwidth}
     \centering
-    \shot{deployer-ui-design.png}{\faDrawPolygon\; Design the lab}
-    \column{0.48\textwidth}
-    \centering
-    \shot{deployer-ui-deploy.png}{\faPlay\; Deploy and follow it live}
+    \includegraphics[width=\linewidth,height=0.80\textheight,keepaspectratio]{../../../images/screenshots/deployer-ui-design.png}
+    \column{0.28\textwidth}
+    \raggedright
+    {\large\textbf{\faDrawPolygon\; Design the lab}}\par\bigskip
+    {\large\textbf{\faPlay\; Deploy and follow it live}}
   \end{columns}
   \note[item]{Key message: no YAML needed to build a lab. The UI and the CLI run the same playbooks on the same Proxmox.}
   \note[item]{Design: drag VMs, containers and networks on a canvas, attach catalog bundles, save the lab as a Git revision.}
@@ -345,7 +338,7 @@
   \end{columns}
   \note[item]{Key message: the foundation works today; the next steps add exercise content and scale.}
   \note[item]{Today: everything shown in this talk. Install and operate, design labs visually (saved as code), configure networks and firewall, deploy infrastructure, product, detection and CTF labs, run TTX and reporting.}
-  \note[item]{Tomorrow: trainee workstations for hands-on exercises, red / blue exercises with a scoreboard, forensics and incident-response (IR) labs, ICS / SCADA and IoT scenarios, a federated catalog to share bundles between organisations.}
+  \note[item]{Tomorrow: trainee workstations for hands-on exercises, red / blue exercises with a scoreboard, forensics and incident-response (IR) labs, scenarios for industrial control systems (ICS), their supervision (SCADA) and IoT, a federated catalog to share bundles between organisations.}
 \end{frame}
 
 % === ROADMAP ===
@@ -355,7 +348,7 @@
     \runitem{\faSync}{State Management (DLSE)}{Labs always match their code} \\
     \noalign{\vspace{1.3em}}
     \runitem{\faDesktop}{End-User Interfaces}{Visualise, modify, control live labs} &
-    \runitem{\faUserGraduate}{Student-Facing Services}{Grow the catalog: Git, chat, file sharing} \\
+    \runitem{\faUserGraduate}{Student-Facing Services}{Grow the catalog, services built into labs} \\
     \noalign{\vspace{1.3em}}
     \runitem{\faIndustry}{Industrial \& IoT}{OT / ICS labs with real hardware} &
     \runitem{\faUsers}{Open-Source Ecosystem}{MISP, Kunai and more as managed labs} \\
@@ -364,9 +357,9 @@
   \note[item]{Core Stabilisation \& Hardening: lock the architecture and the installation, validate cold deployments, align CLI, UI and API.}
   \note[item]{State Management (DLSE): Desired / Live State Engine. It compares running labs with the target state, corrects the drift, keeps an audit trail.}
   \note[item]{End-User Interfaces: for instructors and students, not only operators. Visualise the deployed state, then modify and redeploy, then limited live control.}
-  \note[item]{Student-Facing Services: grow the catalog with the services a class needs: Git (Gitea), chat, file sharing (Nextcloud), per class or per lab.}
-  \note[item]{Industrial \& IoT: from IT to OT / ICS with real industrial components. Prototype first, then a go / no-go decision.}
-  \note[item]{Open-Source Ecosystem: existing open-source tools (MISP, Kunai) as managed, reproducible labs. Later: NGSOTI synergy, federated catalogs.}
+  \note[item]{Student-Facing Services: Git, chat and file sharing exist today as standalone labs. Next: grow the catalog and run these services inside exercise labs, per class or per lab.}
+  \note[item]{Industrial \& IoT: from IT to operational technology (OT / ICS) with real industrial components. Prototype first, then a go / no-go decision.}
+  \note[item]{Open-Source Ecosystem: existing open-source tools (MISP, Kunai) as managed, reproducible labs. Later: synergy with NGSOTI (Next Generation Security Operator Training Infrastructure), federated catalogs.}
 \end{frame}
 
 % === GET INVOLVED ===
