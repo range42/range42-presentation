@@ -70,7 +70,7 @@
 % --- TITLE INFO ---
 \title{\texorpdfstring{\raisebox{-1.65em}{\includegraphics[trim=9 59 4 43, clip, height=4em]{../../../images/logos/range42.png}}\;}{Range42 -- }Project Overview}
 \subtitle{Open-Source Cyber Range Platform for Collaborative Security Training}
-\author{\texorpdfstring{\makebox[1.6em][l]{\faUsers}}{Range42 Team: }%
+\author{\texorpdfstring{}{Range42 Team: }%
   \texorpdfstring{\raisebox{-0.75em}{\includegraphics[trim=109 152 109 186, clip, height=1.9em]{../../../images/logos/nc3.png}}\;}{}NC3.LU
   \quad+\quad
   \texorpdfstring{\raisebox{-0.75em}{\includegraphics[trim=92 108 92 58, clip, height=2.2em]{../../../images/logos/digisquad.pdf}}\;}{}DIGISQUAD
@@ -147,6 +147,7 @@
     \item \makebox[1.6em][l]{\faChessKnight}Tabletop cyber exercises (TTX)
     \item \makebox[1.6em][l]{\faExclamationTriangle}Real-world incident simulation
   \end{itemize}
+  \note[item]{Key message: Range42 is one platform for every kind of cyber exercise, from hands-on labs to tabletop.}
   \note[item]{Blue / red team: trainee environments for attack and defence; admin services such as Wazuh (detection) and MISP (threat intelligence).}
   \note[item]{CTF: catalog challenges (CVE, malware, misconfiguration) with themed web front-ends, e.g.\ a fake hospital or a fake bank.}
   \note[item]{TTX: tabletop exercises with injects and group responses, run with table42 (presented later).}
@@ -350,22 +351,22 @@
 % === ROADMAP ===
 \begin{frame}{Roadmap}
   \begin{tabular}{@{}p{0.53\textwidth}@{\hspace{0.03\textwidth}}p{0.44\textwidth}@{}}
-    \runitem{\faIcon{shield-alt}}{Core Stabilisation \& Hardening}{Lock the architecture, grow the catalog} &
+    \runitem{\faIcon{shield-alt}}{Core Stabilisation \& Hardening}{Lock the architecture, validate deployments} &
     \runitem{\faSync}{State Management (DLSE)}{Labs always match their code} \\
     \noalign{\vspace{1.3em}}
-    \runitem{\faDesktop}{End-User Interfaces}{Tools for organisers and trainers} &
-    \runitem{\faUserGraduate}{Student-Facing Services}{Trainee portal, guided exercises} \\
+    \runitem{\faDesktop}{End-User Interfaces}{Visualise, modify, control live labs} &
+    \runitem{\faUserGraduate}{Student-Facing Services}{Grow the catalog: Git, chat, file sharing} \\
     \noalign{\vspace{1.3em}}
-    \runitem{\faIndustry}{Industrial \& IoT}{ICS / SCADA and IoT scenarios} &
-    \runitem{\faUsers}{Open-Source Ecosystem}{Community and shared catalogs} \\
+    \runitem{\faIndustry}{Industrial \& IoT}{OT / ICS labs with real hardware} &
+    \runitem{\faUsers}{Open-Source Ecosystem}{MISP, Kunai and more as managed labs} \\
   \end{tabular}
   \note[item]{Key message: six development axes guide the next steps of the project.}
-  \note[item]{Core Stabilisation \& Hardening: lock the architecture, harden it, grow the catalog.}
-  \note[item]{State Management (DLSE): a declarative live state engine reconciles running labs with their definition.}
-  \note[item]{End-User Interfaces: Deployer UI, exercise management with scoring dashboards.}
-  \note[item]{Student-Facing Services: a portal where trainees log in, reach their own lab and follow guided exercises, without help from an administrator.}
-  \note[item]{Industrial \& IoT: ICS / SCADA and IoT training scenarios.}
-  \note[item]{Open-Source Ecosystem: federated catalogs, synergy with NGSOTI, community contributions.}
+  \note[item]{Core Stabilisation \& Hardening: lock the architecture and the installation, validate cold deployments, align CLI, UI and API.}
+  \note[item]{State Management (DLSE): Desired / Live State Engine. It compares running labs with the target state, corrects the drift, keeps an audit trail.}
+  \note[item]{End-User Interfaces: for instructors and students, not only operators. Visualise the deployed state, then modify and redeploy, then limited live control.}
+  \note[item]{Student-Facing Services: grow the catalog with the services a class needs: Git (Gitea), chat, file sharing (Nextcloud), per class or per lab.}
+  \note[item]{Industrial \& IoT: from IT to OT / ICS with real industrial components. Prototype first, then a go / no-go decision.}
+  \note[item]{Open-Source Ecosystem: existing open-source tools (MISP, Kunai) as managed, reproducible labs. Later: NGSOTI synergy, federated catalogs.}
 \end{frame}
 
 % === GET INVOLVED ===
