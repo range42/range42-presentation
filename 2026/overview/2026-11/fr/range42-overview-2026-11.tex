@@ -149,9 +149,9 @@
      \end{itemize}
      \note[item]{Message clé : La Range42 est une plateforme unique permettant de jouer différents types d’exercices de cybersécurité, des labs pratiques aux tabletop exercises.}
      \note[item]{Blue Team / Red Team : environnements d’entraînement à l’attaque et à la défense ; services d’administration tels que Wazuh (détection) et MISP (renseignement sur les menaces).}
-     \note[item]{CTF : catalogue de challenges (CVE, malware, erreurs de configuration), avec des interfaces web thématiques, par exemple un faux hôpital ou une banque fictive.}
-     \note[item]{TTX : tabletop exercises avec des injects et des réponses collectives, organisés avec table42 (présenté plus loin).}
-     \note[item]{Simulation sécurisée d’incidents réels : labs isolés, snapshots pour réinitialiser l’environnement et télémétrie pour observer le déroulement.}
+     \note[item]{CTF : catalogue de challenges (vulnérabilités référencées par des CVE, logiciels malveillants, erreurs de configuration), avec des interfaces web thématiques, par exemple un hôpital fictif ou une banque fictive.}
+     \note[item]{TTX : tabletop exercises reposant sur des injects (événements injectés) et des réponses collectives, organisés avec table42 (présenté plus loin).}
+     \note[item]{Simulation sécurisée d’incidents réels : labs isolés, snapshots pour réinitialiser l’environnement et télémétrie pour en observer le déroulement.}
 \end{frame}
 
 % === WHY RANGE42 ===
@@ -161,15 +161,15 @@
      \begin{tabular}{@{}l@{\;\;}l@{\quad}c@{\quad}l@{}}
        & {\color{cyber-soft}\small\bfseries CYBER RANGES ACTUELLES} & & {\small\bfseries RANGE42} \\
        \faLock          & Solutions fermées et propriétaires        & \faArrowRight & \textbf{Open source} \\
-       \faCoins         & Coûts élevés de licence et de plateforme     & \faArrowRight & \textbf{Aucun frais de licence} \\
+       \faCoins         & Coûts élevés de licence et de plateforme     & \faArrowRight & \textbf{Aucuns frais de licence} \\
        \faLink          & Dépendance vis-à-vis de prestataires externes & \faArrowRight & \textbf{Souveraineté numérique} \\
        \faTools         & Scénarios dépendants de la plateforme & \faArrowRight & \textbf{Labs portables, as code} \\
      \end{tabular}
      \note[item]{Message clé : une formation réaliste à la cybersécurité ne devrait pas dépendre d’un fournisseur proposant une solution fermée.}
-     \note[item]{Les principales cyber ranges commerciales, en Europe (Airbus CyberRange, CDeX, CybExer) comme aux États-Unis (SimSpace, Cyberbit), sont propriétaires : leur code ne peut être ni consulté, ni modifié, ni étendu. La Range42 est open source (GPL-3.0).}
-     \note[item]{Coûts : les cyber ranges commerciales sont vendues sous forme de licences ou d’abonnements (l’accès SaaS prend fin avec l’abonnement). La Range42 n’impose aucuns frais de licence : la plateforme fonctionne sur votre propre infrastructure Proxmox VE.}
-     \note[item]{Souveraineté numérique : même lorsqu’elles sont hébergées on-premise, les cyber ranges commerciales dépendent de leur fournisseur pour les licences, les mises à jour et les nouveaux scénarios (Airbus, par exemple, propose le développement de scénarios sous forme de prestations de conseil). Avec la Range42, l’infrastructure, le code et les données restent sous votre contrôle.}
-     \note[item]{Scénarios : les solutions concurrentes disposent d’outils de création de scénarios, mais ceux-ci restent dépendants de leur plateforme. Les labs de la Range42 sont du code, versionné avec Git et reproductible à l’identique à partir de n’importe quel commit.}
+     \note[item]{Les principales cyber ranges commerciales, en Europe (Airbus CyberRange, CDeX, CybExer) comme aux États-Unis (SimSpace, Cyberbit), sont propriétaires : leur code source n’est ni accessible, ni modifiable, ni extensible. La Range42 est open source (GPL-3.0).}
+     \note[item]{Coûts : les cyber ranges commerciales sont proposées sous forme de licences ou d’abonnements (l’accès SaaS prend fin avec l’abonnement). La Range42 n’impose aucuns frais de licence : la plateforme fonctionne sur votre propre infrastructure Proxmox VE.}
+     \note[item]{Souveraineté numérique : même lorsqu’elles sont hébergées sur site, les cyber ranges commerciales dépendent de leur fournisseur pour les licences, les mises à jour et les nouveaux scénarios (Airbus, par exemple, propose le développement de scénarios sous forme de prestations de conseil). Avec la Range42, l’infrastructure, le code et les données restent sous votre contrôle.}
+     \note[item]{Scénarios : les solutions concurrentes disposent d’outils de création de scénarios, mais ceux-ci restent dépendants de leur plateforme. Les labs de la Range42 sont définis sous forme de code, versionnés avec Git et reproductibles à l’identique à partir de n’importe quel commit.}
 \end{frame}
 
 \begin{frame}{Comment fonctionne la Range42 ?}
@@ -222,9 +222,9 @@
        \draw[zoom] (aut.south east) -- (scn.south west);
      \end{tikzpicture}
      \note[item]{Message clé : la Range42 est composée de blocs. Chaque bloc remplit un rôle précis et évolue indépendamment des autres.}
-     \note[item]{Interfaces : Deployer UI (conception visuelle des labs) et Deployer CLI (\texttt{range42-context}, opérations quotidiennes). Un seul deployer pour plusieurs clusters Proxmox.}
-     \note[item]{API : passerelle (authentification, listes de contrôle d’accès (ACL)), API REST (OpenAPI), exécuteur de tâches (ansible-runner) et état en temps réel (WebSocket).}
-     \note[item]{Playbooks : Ansible exécute les opérations ; les secrets sont stockés dans Ansible Vault. Un scénario est un ensemble de bundles : VM/conteneur, pare-feu, service d’administration et challenge CTF.}
+     \note[item]{Interfaces : Deployer UI (conception visuelle des labs) et Deployer CLI (\texttt{range42-context}, opérations quotidiennes). Une seule instance du Deployer peut gérer plusieurs clusters Proxmox.}
+     \note[item]{API : passerelle (authentification, listes de contrôle d’accès (ACL)), API REST (OpenAPI), exécuteur de tâches (ansible-runner) et suivi de l’état en temps réel (WebSocket).}
+     \note[item]{Playbooks : Ansible exécute les opérations ; les secrets sont stockés dans Ansible Vault. Chaque scénario est composé de plusieurs bundles : VM ou conteneur, pare-feu, service d’administration et challenge CTF.}
      \note[item]{Les bundles sont réutilisables (par exemple Wazuh) et construits à partir du catalogue : rôles Ansible, stacks Docker Compose et mécanismes de gamification.}
      \note[item]{Proxmox VE héberge les VM, les conteneurs LXC (Linux Containers) et les réseaux SDN (software-defined networking), créés au moyen de son API.}
      \note[item]{Tout est défini sous forme de code et versionné avec Git : chaque lab peut être reconstruit à l’identique à partir de n’importe quel commit, et chaque modification fait l’objet d’une revue.}
@@ -244,10 +244,10 @@
        \runitem{\faBug}{Sécurité offensive et CTF}{Services vulnérables ou mal configurés, interfaces web thématiques} \\
      \end{tabular}
      \note[item]{Message clé : des labs prêts à être déployés, tous construits à partir des bundles réutilisables présentés sur la diapositive précédente.}
-     \note[item]{Infrastructure : autant de sous-réseaux SDN que nécessaire, isolés à la demande (activation/désactivation du NAT (traduction d’adresses réseau), pare-feu Proxmox). Hôtes Linux (Debian, Ubuntu, Alpine). Windows Active Directory (AD) : contrôleur de domaine et client.}
-     \note[item]{Labs applicatifs : tout outil peut être intégré sous forme de bundle (Docker Compose ou VM), pour la formation à l’administration ou comme cible. Aujourd’hui : MISP, Gitea, Mattermost, Nextcloud et Rocket.Chat.}
-     \note[item]{Détection : tout SIEM (gestion des informations et des événements de sécurité) ou outil de supervision peut être intégré sous forme de bundle. Aujourd’hui : serveur et agents Wazuh.}
-     \note[item]{CTF : services vulnérables (CVE connues) et services mal configurés, chacun étant un bundle réutilisable. Des interfaces web thématiques (par exemple un faux hôpital ou une fausse banque) rendent le challenge plus réaliste.}
+     \note[item]{Infrastructure : autant de sous-réseaux SDN que nécessaire, isolés à la demande. Le NAT (traduction d’adresses réseau) et le pare-feu Proxmox peuvent être activés ou désactivés selon les besoins. Hôtes Linux (Debian, Ubuntu, Alpine). Windows Active Directory (AD) : contrôleur de domaine et poste client.}
+     \note[item]{Labs applicatifs : tout outil peut être intégré sous forme de bundle (Docker Compose ou VM), à des fins de formation à l’administration ou pour servir de cible d’exercice. Aujourd’hui : MISP, Gitea, Mattermost, Nextcloud et Rocket.Chat.}
+     \note[item]{Détection : tout SIEM (gestion des informations et des événements de sécurité) ou tout autre outil de supervision peut être intégré sous forme de bundle. Aujourd’hui : serveur et agents Wazuh.}
+     \note[item]{CTF : services présentant des vulnérabilités connues (référencées par des CVE) ou des erreurs de configuration, chacun étant un bundle réutilisable. Des interfaces web thématiques (par exemple un hôpital fictif ou une banque fictive) rendent le challenge plus réaliste.}
 \end{frame}
 
 % === SEE IT ===
@@ -262,8 +262,8 @@
     {\large\textbf{\faPlay\; Déployer et suivre l’exécution en temps réel}}
   \end{columns}
      \note[item]{Message clé : il n’est pas nécessaire d’écrire du YAML pour construire un lab. L’interface graphique et la CLI exécutent les mêmes playbooks sur la même infrastructure Proxmox.}
-     \note[item]{Conception : faites glisser des VM, des conteneurs et des réseaux sur un canvas, associez-y des bundles du catalogue, puis enregistrez le lab sous forme de révision Git.}
-     \note[item]{Déploiement : vérifications préalables avant toute modification, puis suivi en temps réel de la progression, des logs et des événements.}
+     \note[item]{Conception : faites glisser des VM, des conteneurs et des réseaux sur un canevas, associez-leur des bundles du catalogue, puis enregistrez le lab sous la forme d’une révision Git.}
+     \note[item]{Déploiement : vérifications préalables avant l’application de toute modification, puis suivi en temps réel de la progression, des journaux et des événements.}
 \end{frame}
 
 % === AROUND THE RANGE ===
@@ -274,8 +274,8 @@
      \par\vspace{2.2em}
      {\small\color{cyber-soft}\faPlug\; Les deux outils fonctionnent également avec n’importe quelle cyber range.}
      \note[item]{Message clé : la cyber range fournit l’infrastructure ; ces outils couvrent le déroulement de l’exercice.}
-     \note[item]{table42 : lors d’un TTX organisé avec des diapositives et du papier, certaines décisions se perdent. Ici, l’animateur diffuse les injects, chaque groupe répond dans l’application et l’ensemble des échanges est exporté pour le compte rendu.}
-     \note[item]{Outil de reporting : un incident réel donne lieu à un rapport. Les équipes rédigent le leur pendant l’exercice ; les organisateurs peuvent ensuite les examiner, les valider et les évaluer au même endroit, selon des critères identiques pour toutes les équipes.}
+     \note[item]{table42 : lors d’un TTX organisé à l’aide de diapositives et de documents papier, certaines décisions peuvent se perdre. Ici, l’animateur diffuse les injects, chaque groupe répond dans l’application et l’ensemble des échanges peut être exporté pour constituer le compte rendu.}
+     \note[item]{Outil de reporting : un incident réel donne lieu à un rapport. Les équipes rédigent le leur pendant l’exercice ; les organisateurs peuvent ensuite les examiner, les valider et les évaluer dans le même outil, selon des critères identiques pour toutes les équipes.}
      \note[item]{Les deux outils peuvent être utilisés avec n’importe quelle cyber range, ou indépendamment de toute cyber range.}
 \end{frame}
 
@@ -300,7 +300,7 @@
        \tlup{7.5}{Mars 2026}{Installation guidée}
        \tldown{10.5}{Avr. -- juin 2026}{Site web public et documentation}
        \tlup{13.5}{Août -- sept. 2026}{Réseaux et pare-feu configurables}
-       \tldown{15.5}{Oct 2026}{Outillage des exercices}
+       \tldown{15.5}{Oct. 2026}{Outillage des exercices}
 
        \node[circle, draw=cyber-ink, fill=cyber-bg, inner sep=2.2pt] at (17,0) {};
        \node[font=\tiny\bfseries, text=cyber-ink] at (17,0.3) {aujourd’hui};
@@ -311,7 +311,7 @@
      \note[item]{Mars 2026 : assistant d’installation et CLI \texttt{range42-context} (30 mars).}
      \note[item]{Avril – juin 2026 : site web (17 avril) et site de documentation (28 juin).}
      \note[item]{Août – septembre 2026 : réseaux SDN Proxmox (18 août) et pare-feu intégrés à chaque déploiement (4 septembre).}
-     \note[item]{Octobre 2026 : outillage des exercices, avec l’outil de reporting (débuté le 9 juin) et table42 (10 octobre).}
+     \note[item]{Octobre 2026 : outillage des exercices, avec l’outil de reporting (lancé le 9 juin) et table42 (10 octobre).}
 \end{frame}
 
 % === TODAY VS TOMORROW ===
@@ -331,14 +331,14 @@
        \begin{itemize}
          \item Postes de travail des participants
          \item Exercices Red / Blue avec score
-         \item Labs forensics et réponse à incidents
+         \item Forensique et réponse à incidents
          \item Scénarios ICS et IoT
          \item Catalogue partageable
        \end{itemize}
      \end{columns}
      \note[item]{Message clé : le socle est opérationnel ; les prochaines étapes permettront d’enrichir le contenu des exercices et de passer à l’échelle.}
-     \note[item]{Aujourd’hui : toutes les fonctionnalités présentées ici sont disponibles. Installation et exploitation, conception visuelle des labs (enregistrés sous forme de code), configuration des réseaux et du pare-feu, déploiement de labs, organisation de TTX et utilisation de l’outil de reporting.}
-     \note[item]{Demain : postes de travail pour les participants dans le cadre d’exercices pratiques, exercices Red Team / Blue Team avec tableau des scores, labs de forensics et de réponse à incident (IR), scénarios pour les systèmes de contrôle industriels (ICS), leur supervision (SCADA) et l’IoT, ainsi qu’un catalogue fédéré permettant de partager des bundles entre organisations.}
+     \note[item]{Aujourd’hui : toutes les fonctionnalités présentées ici sont disponibles : installation et exploitation, conception visuelle des labs (définis sous forme de code), configuration des réseaux et du pare-feu, déploiement de labs, organisation de TTX et utilisation de l’outil de reporting.}
+     \note[item]{Demain : postes de travail pour les participants dans le cadre d’exercices pratiques, exercices Red Team / Blue Team avec tableau des scores, labs d’analyse forensique et de réponse à incident (IR), scénarios pour les systèmes de contrôle industriels (ICS), leur supervision (SCADA) et l’IoT, ainsi qu’un catalogue fédéré permettant de partager des bundles entre organisations.}
 \end{frame}
 
 % === ROADMAP ===
@@ -347,18 +347,18 @@
        \runitem{\faIcon{shield-alt}}{Stabilisation et durcissement}{Figer l’architecture et valider les déploiements} &
        \runitem{\faSync}{Gestion de l’état (DLSE)}{Les labs restent toujours conformes à leur code} \\
        \noalign{\vspace{1.3em}}
-       \runitem{\faDesktop}{Interfaces utilisateurs}{Visualiser, modifier et contrôler les labs en cours d’exécution} &
+       \runitem{\faDesktop}{Interfaces utilisateur}{Visualiser, modifier et contrôler les labs en cours d’exécution} &
        \runitem{\faUserGraduate}{Services aux participants}{Enrichir le catalogue, services intégrés aux labs} \\
        \noalign{\vspace{1.3em}}
        \runitem{\faIndustry}{Industrie et IoT}{Labs OT / ICS reposant sur du matériel industriel réel} &
        \runitem{\faUsers}{Écosystème open source}{MISP, Kunai et d’autres outils sous forme de lab} \\
      \end{tabular}
      \note[item]{Message clé : six axes de développement orientent les prochaines étapes du projet.}
-     \note[item]{Stabilisation et durcissement du cœur : figer l’architecture et le processus d’installation, valider les déploiements à froid et assurer la cohérence entre la CLI, l’UI et l’API.}
+     \note[item]{Stabilisation et durcissement : figer l’architecture et le processus d’installation, valider les déploiements depuis une installation vierge et assurer la cohérence entre la CLI, l’UI et l’API.}
      \note[item]{Gestion de l’état (DLSE) : Desired / Live State Engine. Ce moteur compare les labs en cours d’exécution à l’état souhaité, corrige les écarts et conserve une piste d’audit.}
-     \note[item]{Interfaces pour les utilisateurs finaux : destinées aux formateurs et aux participants, et pas uniquement aux opérateurs. Elles permettront de visualiser l’état déployé, puis de le modifier et de redéployer le lab, avant d’introduire certaines possibilités de contrôle en temps réel.}
-     \note[item]{Services aux participants : Git, chat et partage de fichiers existent déjà sous forme de labs autonomes. Suite : enrichir le catalogue et intégrer ces services aux labs d’une formation ou d’un exercice.}
-     \note[item]{Industrie et IoT : étendre le périmètre de l’IT vers les technologies opérationnelles (OT / ICS) avec de véritables composants industriels. Réaliser d’abord un prototype, puis prendre une décision go / no-go.}
+     \note[item]{Interfaces utilisateur : destinées aux formateurs et aux participants, et pas uniquement aux opérateurs. Elles permettront de visualiser l’état du lab déployé, de le modifier et de le redéployer, puis d’exercer un contrôle limité en temps réel.}
+     \note[item]{Services aux participants : Git, chat et partage de fichiers existent déjà sous forme de labs autonomes. Ensuite : enrichir le catalogue et intégrer ces services aux labs d’une formation ou d’un exercice.}
+     \note[item]{Industrie et IoT : étendre le périmètre de l’IT vers les technologies opérationnelles (OT / ICS) avec de véritables composants industriels. Réaliser d’abord un prototype, puis décider de poursuivre ou non (go / no-go).}
      \note[item]{Écosystème open source : intégrer des outils open source existants (MISP, Kunai) sous forme de labs reproductibles. À plus long terme : synergies avec NGSOTI (Next Generation Security Operator Training Infrastructure) et catalogues fédérés.}
 \end{frame}
 
@@ -371,7 +371,7 @@
        \par\vspace{0.9em}
        \runitem{\faCode}{Code}{Automatisation, API et interfaces}
        \par\vspace{0.9em}
-       \runitem{\faBook}{Documentation et tests}{Guides, rapports de bugs et retours}
+       \runitem{\faBook}{Documentation et tests}{Guides, signalements de bugs et retours}
        \par\vspace{0.9em}
        \runitem{\faHandshake}{Partenariats}{Utilisez la plateforme et partagez vos besoins}
        \column{0.36\textwidth}
@@ -389,7 +389,7 @@
      \note[item]{Message clé : la Range42 est open source ; chaque contribution fait progresser la plateforme.}
      \note[item]{Contenu : nouveaux scénarios, bundles pour de nouveaux services et applications, challenges CTF.}
      \note[item]{Code : rôles et automatisation Ansible, API backend, Deployer UI et CLI.}
-     \note[item]{Documentation et tests : guides sur docs.range42.lu, rapports de bugs et retours sur GitHub.}
+     \note[item]{Documentation et tests : guides sur docs.range42.lu, signalements de bugs et retours d’expérience sur GitHub.}
      \note[item]{Partenariats : les organisations peuvent déployer la Range42 pour leurs propres formations et nous faire part de leurs besoins.}
      \note[item]{Le QR code renvoie vers github.com/range42. Contact : range42@nc3.lu.}
 \end{frame}
